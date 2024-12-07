@@ -1,4 +1,9 @@
 import streamlit as st
+from keras.models import load_model
+from keras.preprocessing.image import load_img, img_to_array
+import numpy as np
+import tempfile
+import os
 
 # Set the browser tab name
 st.set_page_config(page_title="WW's Deepfake Detection App 🎈")
@@ -9,22 +14,69 @@ st.write(
     "Not sure if that picture or video is real? Let us reveal the truth."
 )
 
-# File uploader section
-st.subheader("Upload your image or video")
-uploaded_file = st.file_uploader("Choose a file", type=["jpg", "jpeg", "png", "mp4", "mov"])
+# Load the model (ensure it's uploaded to the right directory in your GitHub or the correct path in your environment)
+@st.cache_resource
+def load_deepfake_model():
+    try:
+        model = load_model('improved_vgg16.keras')
+        return model
+    except Exception as e:
+        st.error(f"Error loading the model: {e}")
+        return None
 
-# If a file is uploaded, show the file and add a submit button
+# Function to preprocess the image
+def preprocess_image(image, target_size=(224, 224)):
+    """Load and preprocess an image for prediction."""
+    try:
+        # Load the image (in-memory image file)
+        image = load_img(image, target_size=target_size)
+        
+        # Convert the image to a numpy array
+        image_array = img_to_array(image)
+        
+        # Normalize the image (scale pixel values to [0, 1])
+        image_array = image_array / 255.0
+        
+        # Add a batch dimension
+        image_array = np.expand_dims(image_array, axis=0)
+        return image_array
+    except Exception as e:
+        st.error(f"Error loading or processing the image: {e}")
+        return None
+
+# Load the model
+model = load_deepfake_model()
+
+# File uploader section
+st.subheader("Upload your image")
+uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
+
+# If an image is uploaded, show the file and add a submit button
 if uploaded_file is not None:
-    # Display the uploaded file
-    if uploaded_file.type in ["image/jpeg", "image/png", "image/jpg"]:
-        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
-    elif uploaded_file.type in ["video/mp4", "video/quicktime"]:
-        st.video(uploaded_file, caption="Uploaded Video")
+    # Display the uploaded image
+    st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
     
+    # Preprocess the image for prediction
+    image_array = preprocess_image(uploaded_file)
+
     # Submit button to start deepfake detection
     if st.button("Submit"):
-        # Add logic for deepfake detection here
-        st.write("Running deepfake detection on the uploaded file...")
-        # Placeholder for deepfake detection function
-        # For example, you can call a function like: detect_deepfake(uploaded_file)
-        st.success("Detection completed!")
+        if image_array is not None and model is not None:
+            # Run the deepfake detection model on the image
+            st.write("Running deepfake detection on the uploaded image...")
+
+            try:
+                # Make the prediction
+                prediction = model.predict(image_array)
+                
+                # Assuming the model outputs a probability of being fake (greater than 0.5)
+                # You may need to modify this depending on your model's output
+                if prediction[0][0] > 0.5:
+                    st.write("This is a **fake** image.")
+                else:
+                    st.write("This is a **real** image.")
+                st.success("Detection completed!")
+            except Exception as e:
+                st.error(f"Error during prediction: {e}")
+        else:
+            st.error("Error processing the image or loading the model.")
