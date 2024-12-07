@@ -1,5 +1,8 @@
 import streamlit as st
 
+# Set the browser tab name
+st.set_page_config(page_title="WW's Deepfake Detection App 🎈")
+
 # Title and description of the app
 st.title("🎈 Deepfake Detection")
 st.write(
