@@ -12,8 +12,6 @@ st.write(
     "Not sure if that picture or video is real? Let us reveal the truth."
 )
 
-# Upload file
-uploaded_file = st.file_uploader("Upload a photo or video", type=["jpg", "jpeg", "png", "mp4", "avi"])
 
 
 
