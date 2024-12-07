@@ -2,8 +2,7 @@ import streamlit as st
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import numpy as np
-import tempfile
-import os
+import zipfile
 
 # Set the browser tab name
 st.set_page_config(page_title="WW's Deepfake Detection App 🎈")
@@ -18,7 +17,8 @@ st.write(
 @st.cache_resource
 def load_deepfake_model():
     try:
-        model = load_model('improved_vgg16.keras')
+        # Load model from correct path (ensure the path is correct)
+        model = load_model('improved_vgg16.keras')  # Adjust the path if necessary
         return model
     except Exception as e:
         st.error(f"Error loading the model: {e}")
