@@ -7,7 +7,7 @@ from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import streamlit as st
 
 # Load your trained model
-model_path = 'improved_vgg16.keras'  # Update with your actual model path
+model_path = 'improved_vgg16.keras'  # Ensure the model file is uploaded to the repo
 
 # Error handling for model loading
 try:
@@ -86,16 +86,4 @@ if uploaded_file is not None:
         if frames is not None and len(frames) > 0:
             st.write(f"Analyzing {len(frames)} frames...")
             predictions = model.predict(frames)
-            avg_confidence = np.mean(predictions[:, 0])  # Assuming binary classification
-            result = "FAKE" if avg_confidence > 0.5 else "ORIGINAL"
-            st.success(f"The model predicts the video is {result}. Average Confidence: {avg_confidence:.2f}")
-        else:
-            st.error("Could not process frames from the video.")
-    
-    # Clean up temporary file
-    os.unlink(temp_file_path)
-
-# Submit button
-if st.button("Submit to Check"):
-    if uploaded_file is None:
-        st.warning("Please upload a file first.")
+            avg_confidence = np.mean(predictions[:, 0])  # Assuming binary cl
