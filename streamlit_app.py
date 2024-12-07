@@ -13,22 +13,16 @@ st.write(
     "Not sure if that picture or video is real? Let us reveal the truth."
 )
 
-# Load the model (ensure it's uploaded to the right directory in your GitHub or the correct path in your environment)
-@st.cache_resource
-def load_deepfake_model():
-    try:
-        # Load model from correct path (ensure the path is correct)
-        model = load_model('improved_vgg16.keras')  # Adjust the path if necessary
-        return model
-    except Exception as e:
-        st.error(f"Error loading the model: {e}")
-        return None
+model = load_model(improved_vgg16.keras)
+
+# Image upload
+image_file = st.file_uploader("Choose an image", type=['jpg', 'jpeg', 'png'])
 
 # Function to preprocess the image
 def preprocess_image(image, target_size=(224, 224)):
     """Load and preprocess an image for prediction."""
     try:
-        # Load the image (in-memory image file)
+        # Load the image
         image = load_img(image, target_size=target_size)
         
         # Convert the image to a numpy array
@@ -44,39 +38,22 @@ def preprocess_image(image, target_size=(224, 224)):
         st.error(f"Error loading or processing the image: {e}")
         return None
 
-# Load the model
-model = load_deepfake_model()
-
-# File uploader section
-st.subheader("Upload your image")
-uploaded_file = st.file_uploader("Choose an image", type=["jpg", "jpeg", "png"])
-
-# If an image is uploaded, show the file and add a submit button
-if uploaded_file is not None:
+# Prediction logic
+if image_file is not None:
     # Display the uploaded image
-    st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+    st.image(image_file, caption='Uploaded Image', use_column_width=True)
     
-    # Preprocess the image for prediction
-    image_array = preprocess_image(uploaded_file)
+    # Preprocess the image
+    input_image = preprocess_image(image_file)
 
-    # Submit button to start deepfake detection
-    if st.button("Submit"):
-        if image_array is not None and model is not None:
-            # Run the deepfake detection model on the image
-            st.write("Running deepfake detection on the uploaded image...")
+    if input_image is not None:
+        # Predict using the model
+        prediction = model.predict(input_image)
 
-            try:
-                # Make the prediction
-                prediction = model.predict(image_array)
-                
-                # Assuming the model outputs a probability of being fake (greater than 0.5)
-                # You may need to modify this depending on your model's output
-                if prediction[0][0] > 0.5:
-                    st.write("This is a **fake** image.")
-                else:
-                    st.write("This is a **real** image.")
-                st.success("Detection completed!")
-            except Exception as e:
-                st.error(f"Error during prediction: {e}")
+        # Interpret the result
+        if prediction[0][0] > 0.5:
+            st.write(f"The model predicts the image is **FAKE** with a confidence of {prediction[0][0]:.2f}")
         else:
-            st.error("Error processing the image or loading the model.")
+            st.write(f"The model predicts the image is **ORIGINAL** with a confidence of {1 - prediction[0][0]:.2f}")
+else:
+    st.write("Please upload an image for prediction.")
