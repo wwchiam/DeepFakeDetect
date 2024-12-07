@@ -3,4 +3,8 @@ tensorflow
 opencv-python
 streamlit
 numpy
-Pillow
+pillow
+streamlit
+streamlit_lottie
+numpy
+scikit-learn
