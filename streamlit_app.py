@@ -6,17 +6,6 @@ from tensorflow.keras.models import load_model
 from tensorflow.keras.preprocessing.image import img_to_array, load_img
 import streamlit as st
 
-# Load your trained model
-model_path = 'improved_vgg16.keras'  # Ensure the model file is uploaded to the repo
-
-# Error handling for model loading
-try:
-    model = load_model(model_path)
-    st.success("Model loaded successfully!")
-except Exception as e:
-    st.error(f"Error loading the model: {e}")
-    model = None
-
 # Title and description of the app
 st.title("🎈 Deepfake Detection")
 st.write(
