@@ -13,7 +13,7 @@ st.write(
     "Not sure if that picture or video is real? Let us reveal the truth."
 )
 
-model = load_model(improved_vgg16.keras)
+#model = load_model(improved_vgg16.keras)
 
 # Image upload
 image_file = st.file_uploader("Choose an image", type=['jpg', 'jpeg', 'png'])
