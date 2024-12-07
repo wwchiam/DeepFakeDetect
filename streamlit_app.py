@@ -1,6 +1,6 @@
 import streamlit as st
 
-st.title("🎈 My new app")
+st.title("🎈Deepfake Detection")
 st.write(
-    "Let's start building! For help and inspiration, head over to [docs.streamlit.io](https://docs.streamlit.io/)."
+    "Not sure if that picture or video is real? Let us reveal the truth."
 )
