@@ -47,6 +47,10 @@ st.markdown(
         color: red;
     }
 
+    .stFileUploader>label {
+        color: white;  /* Change the label color to white */
+    }
+
     </style>
     """, unsafe_allow_html=True
 )
