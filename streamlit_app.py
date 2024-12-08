@@ -7,6 +7,10 @@ from sklearn.preprocessing import StandardScaler
 import os
 import io
 
+body {
+  background-color: #f0f2f6;
+}
+    
 
 # Model Loading Function
 def load_deepfake_model(model_path):
@@ -62,29 +66,7 @@ def main():
         </div>
         """,
         unsafe_allow_html=True
-    )
-
-    st.markdown(
-        """
-        <style>
-        /* Set the background for the main app container */
-        [data-testid="stAppViewContainer"] {
-            background-image: background.jpg;
-            background-size: cover;
-            background-repeat: no-repeat;
-            background-attachment: fixed;
-            background-position: center;
-        }
-    
-        /* Optional: Adjust padding for the app to avoid overlapping content */
-        [data-testid="stAppViewContainer"] > div {
-            padding: 0;
-        }
-        </style>
-        """,
-        unsafe_allow_html=True
-    )
-        
+    )        
 
     # Load the model
     model_path = 'improved_vgg16.keras'  # Change this to your model's path
