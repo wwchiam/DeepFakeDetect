@@ -7,10 +7,20 @@ from sklearn.preprocessing import StandardScaler
 import os
 import io
 
-body {
-  background-color: #f0f2f6;
-}
-    
+import streamlit as st
+
+# Set background image using CSS
+st.markdown(
+    """
+    <style>
+    .stApp {
+        background-image: url('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/background.jpg');
+        background-size: cover;
+        background-position: center center;
+    }
+    </style>
+    """, unsafe_allow_html=True
+)
 
 # Model Loading Function
 def load_deepfake_model(model_path):
