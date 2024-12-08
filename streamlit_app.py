@@ -47,8 +47,17 @@ st.markdown(
         color: red;
     }
 
+    body {
+        color: white;  /* Set text color to white */
+    }
+    .stButton>button {
+        color: white;  /* Set button text color to white */
+    }
     .stFileUploader>label {
-        color: white;  /* Change the label color to white */
+        color: white;  /* Set file uploader label color to white */
+    }
+    .stMarkdown, .stText, .stWrite, .stCode, .stCaption, .stSubheader, .stHeader {
+        color: white;  /* Set all other text elements to white */
     }
 
     </style>
