@@ -35,7 +35,7 @@ st.markdown(
         font-weight: bold;
         text-align: left;
         color: white;
-        margin-top: 5px
+        margin-top: 1px
     }
 
     .highlight {
