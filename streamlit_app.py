@@ -27,7 +27,7 @@ st.markdown(
         font-weight: bold; 
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
         text-align: center;
-        padding-top: 20px;
+        padding-top: 10px;
     }
 
     .sub-title {
@@ -35,6 +35,7 @@ st.markdown(
         font-weight: bold;
         text-align: left;
         color: white;
+        margin-top: 5px
     }
 
     .highlight {
