@@ -1,11 +1,11 @@
 import streamlit as st
 import numpy as np
-import os
-import cv2
-from mtcnn import MTCNN
+import pandas as pd
 from keras.models import load_model
-from keras.preprocessing.image import img_to_array
-import tempfile
+from keras.preprocessing.image import load_img, img_to_array
+from sklearn.preprocessing import StandardScaler
+import os
+import io
 
 
 # Model Loading Function
@@ -21,58 +21,28 @@ def load_deepfake_model(model_path):
         return None, "The model file does not exist. Please check the path."
 
 
-# Preprocess Image for Prediction
-def preprocess_frame(frame, target_size=(224, 224)):
-    """Preprocess a single frame for deepfake detection."""
+# Image Preprocessing Function
+def preprocess_image(image_file, target_size=(224, 224)):
+    """Preprocess the uploaded image for deepfake detection."""
     try:
-        frame = cv2.resize(frame, target_size)
-        frame = frame / 255.0
-        frame = img_to_array(frame)
-        frame = np.expand_dims(frame, axis=0)
-        return frame
+        # Load image
+        image = load_img(image_file, target_size=target_size)
+        
+        # Convert image to numpy array
+        image_array = img_to_array(image) 
+        
+        # Normalize image array (scale pixel values between 0 and 1)
+        image_array = image_array / 255.0 
+        
+        # Add batch dimension to the image
+        image_array = np.expand_dims(image_array, axis=0)
+        return image_array
     except Exception as e:
-        st.error(f"Error processing the frame: {e}")
+        st.error(f"Error processing the image: {e}")
         return None
 
 
-# Extract Two Frames with Faces Using MTCNN
-def extract_two_frames_with_faces(video_file, frame_skip=10):
-    """Extract up to 2 frames containing faces using MTCNN."""
-    detector = MTCNN()
-    extracted_frames = []
-
-    try:
-        cap = cv2.VideoCapture(video_file.name)
-        total_frames = int(cap.get(cv2.CAP_PROP_FRAME_COUNT))
-
-        for frame_index in range(0, total_frames, frame_skip):
-            cap.set(cv2.CAP_PROP_POS_FRAMES, frame_index)
-            ret, frame = cap.read()
-
-            if not ret:
-                break
-
-            # Detect faces in the frame
-            faces = detector.detect_faces(frame)
-            if faces:
-                extracted_frames.append(frame)
-
-            # Stop after extracting 2 frames
-            if len(extracted_frames) >= 2:
-                break
-
-        cap.release()
-
-        if not extracted_frames:
-            st.warning("No faces detected in the video.")
-        return extracted_frames
-
-    except Exception as e:
-        st.error(f"Error extracting frames: {e}")
-        return []
-
-
-# Streamlit App Layout and Logic
+# Streamlit App Layout and Prediction Logic
 def main():
     st.title("🎈 Deepfake Detection")
 
@@ -84,48 +54,33 @@ def main():
         st.error(model_error)
         return
 
-    # File uploader for video
-    uploaded_video = st.file_uploader("Upload a video to check if it's real or fake", type=["mp4", "avi", "mov"])
+    # File uploader for image
+    uploaded_file = st.file_uploader("Upload an image to check if it's real or fake", type=["jpg", "jpeg", "png"])
 
-    if uploaded_video is not None:
-        # Display the uploaded video
-        st.video(uploaded_video, format="video/mp4")
+    if uploaded_file is not None:
+        # Display the uploaded image
+        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+
+        # Preprocess the image
+        image_array = preprocess_image(uploaded_file)
 
         if st.button("Submit"):
-            st.write("Processing the video...")
+            if image_array is not None and model is not None:
+                st.write("Running deepfake detection...")
 
-            # Save the uploaded file to a temporary location
-            with tempfile.NamedTemporaryFile(delete=False, suffix='.mp4') as temp_video:
-                temp_video.write(uploaded_video.read())
-                temp_video_path = temp_video.name
+                try:
+                    # Predict with the model
+                    prediction = model.predict(image_array)
 
-            # Extract two frames with faces
-            frames = extract_two_frames_with_faces(temp_video, frame_skip=10)
-
-            if frames:
-                predictions = []
-
-                # Run prediction on each extracted frame
-                for frame in frames:
-                    preprocessed_frame = preprocess_frame(frame)
-                    if preprocessed_frame is not None:
-                        prediction = model.predict(preprocessed_frame)
-                        predictions.append(prediction[0][0])
-
-                # Compute average prediction
-                if predictions:
-                    avg_prediction = np.mean(predictions)
-
-                    # Assuming prediction > 0.5 means fake
-                    if avg_prediction > 0.5:
-                        st.write("The video is **fake**.")
+                    # Assuming the model outputs 0 for real and 1 for fake
+                    if prediction[0][0] > 0.5:
+                        st.write("This is a **fake** image.")
                     else:
-                        st.write("The video is **real**.")
+                        st.write("This is a **real** image.")
                     st.success("Detection completed!")
-                else:
-                    st.warning("No valid predictions were made.")
-            else:
-                st.warning("No frames with faces were extracted from the video.")
+                except Exception as e:
+                    st.error(f"Error during prediction: {e}")
+
 
 if __name__ == "__main__":
     main()
