@@ -66,7 +66,7 @@ def preprocess_image(image_file, target_size=(224, 224)):
 
 # Streamlit App Layout and Prediction Logic
 def main():
-    st.title("Welcome to Deepfake Detection")
+    st.markdown('<h1 class="title">Welcome to Deepfake Detection</h1>', unsafe_allow_html=True)
     st.markdown(
     """
     <div style="font-size: 22px; font-weight: bold; text-align: left; color: white;">
