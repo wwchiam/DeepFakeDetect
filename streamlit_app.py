@@ -44,15 +44,21 @@ def preprocess_image(image_file, target_size=(224, 224)):
 
 # Streamlit App Layout and Prediction Logic
 def main():
-    st.title("Deepfake Detection")
-    st.write("When in doubt, check with us")
+    st.title("Free Deepfake Detection")
+    st.markdown(
+    """
+    <div style="font-size: 22px; font-weight: bold; text-align: center; color: black;">
+        When in doubt, check with us
+    </div>
+    """,
+    unsafe_allow_html=True
+)
     st.image('DeepfakeBanner.jpg', use_column_width=True)
     
     st.markdown(
         """
        <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold; color: red;">
-            Did you know? <br>
-            <i>By 2023, experts estimated that <b>90% of online videos</b> could be altered or fake, posing a major threat to truth and trust.</i>
+            Seeing is no longer believing. <br>
         </div>
         """,
         unsafe_allow_html=True
@@ -71,7 +77,7 @@ def main():
         return
 
     # File uploader for image
-    uploaded_file = st.file_uploader("Upload an image to check if it's real or fake", type=["jpg", "jpeg", "png"])
+    uploaded_file = st.file_uploader("Upload your file", type=["jpg", "jpeg", "png"])
 
     if uploaded_file is not None:
         # Display the uploaded image
