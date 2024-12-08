@@ -9,7 +9,9 @@ import io
 
 import streamlit as st
 
-# Set background image using CSS
+import streamlit as st
+
+# Streamlit style 
 st.markdown(
     """
     <style>
@@ -18,17 +20,49 @@ st.markdown(
         background-size: cover;
         background-position: center center;
     }
+
     .title {
-        color: white;  /* Make the title white */
-        font-size: 50px;  /* Increase font size */
-        font-weight: bold;  /* Make the title bold */
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Add a shadow to the text for better contrast */
-        text-align: center;  /* Center the title */
-        padding-top: 20px;  /* Add some padding at the top */
+        color: white; 
+        font-size: 50px; 
+        font-weight: bold; 
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+        text-align: center;
+        padding-top: 20px;
     }
+
+    .sub-title {
+        font-size: 22px;
+        font-weight: bold;
+        text-align: left;
+        color: white;
+    }
+
+    .highlight {
+        text-align: center;
+        margin-top: 20px;
+        font-size: 24px;
+        font-weight: bold;
+        color: red;
+    }
+
     </style>
     """, unsafe_allow_html=True
 )
+
+# Title with custom styling
+st.markdown('<h1 class="title">Welcome to Deepfake Detection</h1>', unsafe_allow_html=True)
+
+# Sub-title text
+st.markdown('<div class="sub-title">When in doubt, check with us</div>', unsafe_allow_html=True)
+
+# Image
+st.image('DeepfakeBanner.jpg', use_column_width=True)
+
+# Highlight message
+st.markdown('<div class="highlight">Seeing is no longer believing.</div>', unsafe_allow_html=True)
+
+
+
 
 # Model Loading Function
 def load_deepfake_model(model_path):
@@ -64,27 +98,8 @@ def preprocess_image(image_file, target_size=(224, 224)):
         return None
 
 
-# Streamlit App Layout and Prediction Logic
+# Prediction Logic
 def main():
-    st.markdown('<h1 class="title">Welcome to Deepfake Detection</h1>', unsafe_allow_html=True)
-    st.markdown(
-    """
-    <div style="font-size: 22px; font-weight: bold; text-align: left; color: white;">
-        When in doubt, check with us
-    </div>
-    """,
-    unsafe_allow_html=True
-)
-    st.image('DeepfakeBanner.jpg', use_column_width=True)
-    
-    st.markdown(
-        """
-       <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold; color: red;">
-            Seeing is no longer believing. <br>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )        
 
     # Load the model
     model_path = 'improved_vgg16.keras'  # Change this to your model's path
