@@ -18,6 +18,14 @@ st.markdown(
         background-size: cover;
         background-position: center center;
     }
+    .title {
+        color: white;  /* Make the title white */
+        font-size: 50px;  /* Increase font size */
+        font-weight: bold;  /* Make the title bold */
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);  /* Add a shadow to the text for better contrast */
+        text-align: center;  /* Center the title */
+        padding-top: 20px;  /* Add some padding at the top */
+    }
     </style>
     """, unsafe_allow_html=True
 )
@@ -61,7 +69,7 @@ def main():
     st.title("Welcome to Deepfake Detection")
     st.markdown(
     """
-    <div style="font-size: 22px; font-weight: bold; text-align: left; color: black;">
+    <div style="font-size: 22px; font-weight: bold; text-align: left; color: white;">
         When in doubt, check with us
     </div>
     """,
