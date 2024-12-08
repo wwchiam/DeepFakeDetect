@@ -66,8 +66,8 @@ def main():
         unsafe_allow_html=True
     )
 
-st.title("Welcome to Deepfake Detector")
-st.write("When in doubt, check with us")
+    st.title("Welcome to Deepfake Detector")
+    st.write("When in doubt, check with us")
     
 
     # Load the model
