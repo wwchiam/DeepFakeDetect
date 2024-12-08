@@ -8,3 +8,8 @@ streamlit
 streamlit_lottie
 numpy
 scikit-learn
+cv2
+os
+mtcnn
+tempfile
+
