@@ -55,7 +55,7 @@ st.markdown(
 st.markdown('<h1 class="title">Welcome to Deepfake Detection</h1>', unsafe_allow_html=True)
 
 # Sub-title text
-st.markdown('<div class="sub-title">When in doubt, check with us</div>', unsafe_allow_html=True)
+st.markdown('<div class="highlight">When in doubt, check with us.</div>', unsafe_allow_html=True)
 
 # Image
 st.image('DeepfakeBanner.jpg', use_column_width=True)
