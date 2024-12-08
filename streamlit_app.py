@@ -45,20 +45,12 @@ def preprocess_image(image_file, target_size=(224, 224)):
 # Streamlit App Layout and Prediction Logic
 def main():
     st.title("Deepfake Detection")
+    st.write("When in doubt, check with us")
     st.image('DeepfakeBanner.jpg', use_column_width=True)
-
-    st.markdown(
-    """
-    <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold; color: red;">
-        "Deepfakes can fool the human eye, but not our detection tool!"
-    </div>
-    """,
-    unsafe_allow_html=True
-    )
-
+    
     st.markdown(
         """
-        <div style="text-align: center; margin-top: 10px; font-size: 18px; color: black;">
+       <div style="text-align: center; margin-top: 20px; font-size: 24px; font-weight: bold; color: red;">
             Did you know? <br>
             <i>By 2023, experts estimated that <b>90% of online videos</b> could be altered or fake, posing a major threat to truth and trust.</i>
         </div>
@@ -67,7 +59,7 @@ def main():
     )
 
     st.title("Welcome to Deepfake Detector")
-    st.write("When in doubt, check with us")
+    
     
 
     # Load the model
