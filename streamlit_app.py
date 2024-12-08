@@ -67,18 +67,24 @@ def main():
     st.markdown(
         """
         <style>
-        body {
-            background-image: url('background.jpg');
+        /* Set the background for the main app container */
+        [data-testid="stAppViewContainer"] {
+            background-image: background.jpg;
             background-size: cover;
             background-repeat: no-repeat;
             background-attachment: fixed;
+            background-position: center;
+        }
+    
+        /* Optional: Adjust padding for the app to avoid overlapping content */
+        [data-testid="stAppViewContainer"] > div {
+            padding: 0;
         }
         </style>
         """,
         unsafe_allow_html=True
     )
-
-    
+        
 
     # Load the model
     model_path = 'improved_vgg16.keras'  # Change this to your model's path
