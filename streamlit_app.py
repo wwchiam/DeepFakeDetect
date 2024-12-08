@@ -44,6 +44,7 @@ def preprocess_image(image_file, target_size=(224, 224)):
 
 # Streamlit App Layout and Prediction Logic
 def main():
+    st.image('DeepfakeBanner.jpg', use_column_width=True)
     st.title("🎈 Deepfake Detection")
 
     # Load the model
