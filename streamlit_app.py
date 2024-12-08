@@ -52,7 +52,7 @@ st.markdown(
 )
 
 # Title with custom styling
-st.markdown('<h1 class="title">Welcome to Deepfake Detection</h1>', unsafe_allow_html=True)
+st.markdown('<div class="title">Welcome to Deepfake Detection</div>', unsafe_allow_html=True)
 
 # Image
 st.image('DeepfakeBanner.jpg', use_column_width=True)
