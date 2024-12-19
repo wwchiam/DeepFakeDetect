@@ -72,7 +72,7 @@ st.markdown(
 st.markdown('<div class="title">Welcome to Deepfake Detection</div>', unsafe_allow_html=True)
 
 # Image
-st.image('DeepfakeBanner.jpg', use_column_width=True)
+st.image('DeepfakeBanner.jpg', use_container_width =True)
 
 # Highlight message
 st.markdown('<div class="highlight">Seeing is no longer believing.</div>', unsafe_allow_html=True)
@@ -130,7 +130,7 @@ def main():
 
     if uploaded_file is not None:
         # Display the uploaded image
-        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
+        st.image(uploaded_file, caption="Uploaded Image", use_container_width =True)
 
         # Preprocess the image
         image_array = preprocess_image(uploaded_file)
