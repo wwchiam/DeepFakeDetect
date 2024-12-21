@@ -46,10 +46,10 @@ st.markdown(
         color: #ffffff;
     }
 
-    /* Adjusting the subheader font size */
-    .stSubheader {
-        font-size: 18px !important; /* You can change this value to adjust font size */
-        color: #ffffff !important;
+    /* Adjusting the font size of subheader elements */
+    .stMarkdown h3 {
+        font-size: 20px !important;  /* Adjust this value to set the font size for the subheader */
+        color: #ffffff !important;  /* Optional: ensure the color is white */
     }
 
     /* Center tabs */
