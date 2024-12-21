@@ -25,16 +25,17 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
-    /* New styles for centering the banner image */
-    .banner-image {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
+    
+    /* Style for the banner image */
+    .stImage > img {
+        max-width: 400px; /* Adjust this to your desired width */
+        height: auto; /* Maintains aspect ratio */
+        display: block; /* Removes any inline spacing */
+        margin-left: auto;
+        margin-right: auto; /* Centers the image */
+        margin-bottom: 20px; /* Space below the image */
     }
-    .banner-image img {
-        width: 50px;
-        height: auto;
-    }
+    
     .title {
         font-size: 50px;
         font-weight: bold;
@@ -95,11 +96,8 @@ st.markdown(
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
-# Banner Image
-st.markdown('<div class="banner-image">', unsafe_allow_html=True)
-# Change use_column_width to use_container_width
+# Banner Image - No custom div needed, let Streamlit handle the structure
 st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg', use_container_width=True)
-st.markdown('</div>', unsafe_allow_html=True)
 
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
