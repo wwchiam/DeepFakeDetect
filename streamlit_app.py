@@ -106,9 +106,9 @@ st.markdown(
 ###################################################################################################################################
 
 # Title Section
-/* st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True) */
-/* st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True) */
-/* st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg') */
+# st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
+# st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
+# st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Title Section
 st.markdown(
@@ -183,7 +183,7 @@ def main():
         return
 
     # Tab Layout
-    /* tabs = st.tabs(["About", "Detection","Contact Us"]) */
+    # tabs = st.tabs(["About", "Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
