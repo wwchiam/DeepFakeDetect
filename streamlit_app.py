@@ -27,13 +27,13 @@ st.markdown(
     }
     
     /* Style for the banner image */
-    .stImage > img {
-        max-width: 400px; /* Adjust this to your desired width */
-        height: auto; /* Maintains aspect ratio */
-        display: block; /* Removes any inline spacing */
-        margin-left: auto;
-        margin-right: auto; /* Centers the image */
-        margin-bottom: 20px; /* Space below the image */
+    img[src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg"] {
+        width: 400px !important; /* Adjust to your desired width */
+        height: auto !important;
+        display: block !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        margin-bottom: 20px !important;
     }
     
     .title {
