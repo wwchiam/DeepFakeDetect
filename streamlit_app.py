@@ -45,10 +45,11 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
-    /* Adjust tab headers */
+    /* Adjust tab headers to match Objective font size */
     .stTabs [role="tab"] {
-        font-size: 20px !important;
-        color: #ffffff !important; /* Set tab headers to white */
+        font-size: 22px !important;
+        font-weight: bold !important;
+        color: #ffffff !important;
     }
     /* Ensure tabs and content have white text */
     .css-1cpxqw2, .css-18e3th9, .css-1n76uvr {
@@ -62,11 +63,12 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
-
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-st.image("DeepfakeBanner.jpg", use_container_width=True)
+
+# Banner
+st.image("DeepfakeBanner.jpg", use_container_width=False, width=800)  # Adjust width to 50% of the original
 
 # Model Loading
 @st.cache_resource
@@ -109,7 +111,7 @@ def fancy_detection(image_file, prediction, threshold=0.5):
 # Main Functionality
 def main():
     # Load the model
-    model_path = 'improved_vgg16.keras'  # Update with your model path
+    model_path = 'improved_vgg16.keras' 
     model, model_error = load_deepfake_model(model_path)
 
     if model_error:
@@ -117,7 +119,7 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Start Detection"])
+    tabs = st.tabs(["About", "Start Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
@@ -161,6 +163,11 @@ def main():
                             st.error(f"Error during prediction: {e}")
                 else:
                     st.warning("Please upload a valid image.")
+    # Contact us Tab
+        with tabs[2]:
+            st.subheader("Need Help?")
+            st.write("Email to xxx for more information")
+            
 
 if __name__ == "__main__":
     main()
