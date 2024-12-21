@@ -29,12 +29,13 @@ st.markdown(
     """
     <div style="background-color: #002d26; padding: 40px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
         <h1 style="color: #ffffff; font-size: 3rem;">Free Deepfake Detector</h1>
-        <div style="margin-top: 20px;">
-            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
-        </div>
         <p style="color: #d4f0e2; font-size: 1rem; margin-top: 20px;">
             Seeing is no longer believing. Protect yourself from fake images with AI Solution. 
         </p>
+        <div style="margin-top: 20px;">
+            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
+        </div>
+        
     </div>
     """,
     unsafe_allow_html=True,
