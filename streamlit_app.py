@@ -25,6 +25,30 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
+    /* New styles for layout */
+    .stApp {
+        display: flex;
+        flex-direction: row;
+        align-items: flex-start;
+    }
+    .stApp > div:nth-child(1) {
+        width: 50%; /* Adjust as needed */
+        padding-right: 20px; /* Space between image and tabs */
+    }
+    .stApp > div:nth-child(2) {
+        width: 50%; /* Adjust as needed */
+        display: flex;
+        flex-direction: column;
+    }
+    /* Ensure tabs are aligned at the top with the image */
+    .stTabs {
+        margin-top: 0;
+    }
+    /* Adjust image display */
+    .stImage > img {
+        width: 100%;
+        height: auto;
+    }
     .title {
         font-size: 50px;
         font-weight: bold;
@@ -82,9 +106,33 @@ st.markdown(
 ###################################################################################################################################
 
 # Title Section
-st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
+/* st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True) */
+/* st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True) */
+/* st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg') */
+
+# Title Section
+st.markdown(
+    """
+    <div style="display: flex; flex-direction: row;">
+        <div style="width: 50%;">
+            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
+        </div>
+        <div style="width: 50%;">
+            <div class="title">Deepfake Detection System</div>
+            <div class="sub-title">Seeing is no longer believing</div>
+            <div class="tabs-container">
+    """,
+    unsafe_allow_html=True
+)
+
+# Tabs Layout
+tabs = st.tabs(["About", "Detection", "Contact Us"])
+
+# Close the divs
+st.markdown("""
+            </div>
+        </div>
+    </div>
 
 # Model Loading
 @st.cache_resource
@@ -135,7 +183,7 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Detection","Contact Us"])
+    /* tabs = st.tabs(["About", "Detection","Contact Us"]) */
     
     # About Tab
     with tabs[0]:
