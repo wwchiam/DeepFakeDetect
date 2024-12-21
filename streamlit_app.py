@@ -25,15 +25,20 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
+
+    /* Make sure the image container takes up the full width */
+    .stImageContainer {
+        width: 100% !important; /* Ensure the container spans the full width */
+        padding: 0 !important;   /* Remove any padding */
+        margin: 0 !important;    /* Remove any margin */
+    }
     
-    /* Style for the banner image */
-    img[src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg"] {
-        width: 400px !important; /* Adjust to your desired width */
-        height: auto !important;
-        display: block !important;
-        margin-left: auto !important;
-        margin-right: auto !important;
-        margin-bottom: 20px !important;
+    /* Ensure the image itself spans the full width of the container */
+    .stImageContainer img {
+        width: 100% !important;   /* Stretch the image to 100% of the container */
+        height: auto !important;  /* Maintain aspect ratio */
+        display: block !important; /* Remove extra space below the image */
+        margin: 0 auto !important; /* Center the image */
     }
     
     .title {
