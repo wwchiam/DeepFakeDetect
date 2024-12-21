@@ -45,6 +45,12 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
+    /* Center the banner image */
+    .banner-image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px;
+    }
     /* Center tabs */
     .stTabs div[role="tablist"] {
         justify-content: center !important;
@@ -71,8 +77,10 @@ st.markdown(
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
-# Center the banner and reduce its size by 50%
-st.image("DeepfakeBanner.jpg", use_container_width=False, width=800, caption=None)
+# Center and adjust the banner size
+st.markdown('<div class="banner-image">', unsafe_allow_html=True)
+st.image("DeepfakeBanner.jpg", use_container_width=False, width=700) 
+st.markdown('</div>', unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
