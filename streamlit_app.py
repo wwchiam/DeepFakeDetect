@@ -152,6 +152,7 @@ tabs = st.tabs(["About", "Detection", "Contact Us"])
 st.markdown("""
         </div>
     </div>
+""", unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
