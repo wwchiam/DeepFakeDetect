@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_navigation_bar import st_navbar
 
 # Page configuration
 st.set_page_config(
@@ -19,25 +20,21 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-
-import streamlit as st
-from streamlit_navigation_bar import st_navbar
-
-page = st_navbar(["Detection", "About Us", "Contact Us"])
+page = st_navbar(["Home", "About Us", "Contact Us"])
 st.write(page)
 
+##########################################################################################################################
 
 # Initialize session state for navigation
 if "current_page" not in st.session_state:
     st.session_state["current_page"] = "Home"
 
 # Main Layout Split into Two Columns
-col1, col2 = st.columns([1.5, 2.5])  # Make column 1 slightly bigger
+col1, col2 = st.columns([1.5, 2.5])  # Adjust column widths as needed
 
-
-# Left Column: Banner & Navigation Section inside the same Green Box
+# Left Column: Banner & Navigation Section
 with col1:
-    # Green Box Container for Title, Subtitle, and Banner Image
+    # Green Box Container for Title and Banner Image
     st.markdown(
         """
         <div style="background-color: #004d40; padding: 40px; border-radius: 20px; margin-bottom: 20px; text-align: center; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);">
@@ -46,7 +43,7 @@ with col1:
                 Seeing is no longer believing. Protect yourself from fake images with AI Solution.
             </p>
             <div style="margin-top: 20px;">
-                    <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
+                    <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" style="width: 100%; height: auto; border-radius: 10px;" />
             </div>
         </div>
         """,
@@ -62,17 +59,12 @@ with col2:
 
         if uploaded_file:
             st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
-            st.markdown(
-                """
-                <div style="background-color: #004c40; color: #ffffff; padding: 20px; border-radius: 10px; font-size: 1.2rem;">
-                    Result Session
-                </div>
-                """,
-                unsafe_allow_html=True,
-            )
 
             if st.button("Detect Deepfake"):
-                st.write("Analysis feature yet to be implemented.")
+                with st.spinner("Detecting deepfake..."):
+                    # Add your detection logic here
+                    time.sleep(2)  # Simulating a delay
+                    st.success("Deepfake detected!")
 
     elif st.session_state["current_page"] == "About Us":
         st.title("About Us")
