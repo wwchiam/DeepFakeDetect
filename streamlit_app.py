@@ -26,23 +26,24 @@ st.markdown(
         color: #ffffff;
     }
 
-    /* Center the container for the image */
+    /* Ensure the image container is centered */
     .stImageContainer {
         display: flex !important;
-        justify-content: center !important;
-        align-items: center !important;
-        height: 100% !important;  /* Ensures it fills the vertical space */
+        justify-content: center !important;  /* Horizontal centering */
+        align-items: center !important;      /* Vertical centering */
+        height: 100% !important;             /* Ensures it fills the container */
         padding: 0 !important;
         margin: 0 !important;
+        width: 100% !important;              /* Ensure it takes up full available width */
     }
 
-    /* Ensure the image is responsive and centered */
+    /* Adjust the image to be responsive and centered */
     .stImageContainer img {
-        max-width: 80% !important; /* You can adjust this percentage as needed */
-        height: auto !important;
-        display: block !important;
+        max-width: 80% !important;  /* Set the image width to 80% of the container width */
+        height: auto !important;    /* Maintain aspect ratio */
+        display: block !important;  /* Removes extra space below the image */
         margin-left: auto !important;
-        margin-right: auto !important;
+        margin-right: auto !important;  /* Horizontally center the image */
     }
     
     .title {
