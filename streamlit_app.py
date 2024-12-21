@@ -21,6 +21,7 @@ st.markdown(
         background-size: cover;
         background-position: center;
         font-family: Arial, sans-serif;
+        font-size: 20px;
         color: #ffffff; /* Set all text to white */
     }
     .title {
@@ -85,7 +86,7 @@ st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsaf
 
 # Center and adjust the banner size
 st.markdown('<div class="banner-image">', unsafe_allow_html=True)
-st.image("DeepfakeBanner.jpg", use_container_width=True, width=700) 
+st.image("DeepfakeBanner.jpg", use_container_width=false, width=200) 
 st.markdown('</div>', unsafe_allow_html=True)
 
 # Model Loading
