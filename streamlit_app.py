@@ -132,29 +132,29 @@ st.markdown(
 # st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
-st.markdown(
-    """
-    <div class="title-container">
-        <div class="title">Deepfake Detection System</div>
-        <div class="sub-title">Seeing is no longer believing</div>
-    </div>
-    <div class="content-row">
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
-        </div>
-        <div class="tabs-container">
-    """,
-    unsafe_allow_html=True
-)
+# st.markdown(
+#    """
+#    <div class="title-container">
+#        <div class="title">Deepfake Detection System</div>
+#        <div class="sub-title">Seeing is no longer believing</div>
+#    </div>
+#    <div class="content-row">
+#        <div class="image-container">
+#            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
+#        </div>
+#        <div class="tabs-container">
+#    """,
+#    unsafe_allow_html=True
+#)
 
 # Create tabs within the tabs-container context
-tabs = st.tabs(["About", "Detection", "Contact Us"])
+# tabs = st.tabs(["About", "Detection", "Contact Us"])
 
 # Close the tabs-container and content-row
-st.markdown("""
-        </div>
-    </div>
-""", unsafe_allow_html=True)
+# st.markdown("""
+#        </div>
+#    </div>
+# """, unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
@@ -196,6 +196,23 @@ def fancy_detection(image_file, prediction, threshold=0.5):
 
 # Main Functionality
 def main():
+    st.markdown(
+        """
+        <div class="title-container">
+            <div class="title">Deepfake Detection System</div>
+            <div class="sub-title">Seeing is no longer believing</div>
+        </div>
+        <div class="content-row">
+            <div class="image-container">
+                <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
+            </div>
+            <div class="tabs-container">
+        """,
+        unsafe_allow_html=True
+    )
+    
+    tabs = st.tabs(["About", "Detection", "Contact Us"])
+    
     # Load the model
     model_path = 'improved_vgg16.keras' 
     model, model_error = load_deepfake_model(model_path)
