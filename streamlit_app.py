@@ -44,17 +44,19 @@ st.markdown(
     }
     /* Image container */
     .image-container {
-        width: 45%; /* Adjust as needed */
+        width: 50%; /* Adjust as needed */
     }
-     /* Tabs container */
+    /* Tabs container */
     .tabs-container {
-        width: 45%; /* Adjust as needed */
+        width: 50%; /* Adjust as needed */
         display: flex;
         flex-direction: column;
-        align-items: flex-end; /* Aligns items to the end of the flex container */
+        /* Force tabs to stay on the same line as the image */
+        order: 1;
     }
-    /* Ensure tabs are aligned to the right */
+    /* Ensure tabs are at the top of their container */
     .tabs-container .stTabs {
+        margin-top: 0;
         width: 100%; /* Ensure tabs take up full width of their container */
     }
     /* Ensure tabs are aligned at the top with the image */
@@ -143,14 +145,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Tabs Layout
+# Tabs Layout - Here's the key: Ensure tabs are created within the right div
 tabs = st.tabs(["About", "Detection", "Contact Us"])
 
 # Close the divs
 st.markdown("""
         </div>
     </div>
-""", unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
