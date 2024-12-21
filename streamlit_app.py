@@ -46,11 +46,16 @@ st.markdown(
     .image-container {
         width: 45%; /* Adjust as needed */
     }
-    /* Tabs container */
+     /* Tabs container */
     .tabs-container {
         width: 45%; /* Adjust as needed */
         display: flex;
         flex-direction: column;
+        align-items: flex-end; /* Aligns items to the end of the flex container */
+    }
+    /* Ensure tabs are aligned to the right */
+    .tabs-container .stTabs {
+        width: 100%; /* Ensure tabs take up full width of their container */
     }
     /* Ensure tabs are aligned at the top with the image */
     .stTabs {
