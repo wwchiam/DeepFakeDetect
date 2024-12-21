@@ -25,6 +25,16 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
+    /* New styles for centering the banner image */
+    .banner-image {
+        display: flex;
+        justify-content: center;
+        margin-bottom: 20px; /* Space below the image */
+    }
+    .banner-image img {
+        max-width: 80%; /* Adjust as needed */
+        height: auto;
+    }
     .title {
         font-size: 50px;
         font-weight: bold;
@@ -84,7 +94,13 @@ st.markdown(
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
+
+# Banner Image
+st.markdown('<div class="banner-image">', unsafe_allow_html=True)
+st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg', use_column_width=False)
+st.markdown('</div>', unsafe_allow_html=True)
+
+# st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Model Loading
 @st.cache_resource
