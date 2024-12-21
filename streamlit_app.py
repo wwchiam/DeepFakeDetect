@@ -4,13 +4,15 @@ from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import os
 
-# Streamlit page configuration
+# Page Title Appear at browser
 st.set_page_config(
     page_title="Deepfake Detection",
     page_icon="🕵️‍♂️",
     layout="wide",
     initial_sidebar_state="auto"
 )
+
+# Global CSS
 
 st.markdown(
     """
@@ -77,6 +79,7 @@ st.markdown(
     """, unsafe_allow_html=True
 )
 
+###################################################################################################################################
 
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
@@ -131,7 +134,7 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Start Detection","Contact Us"])
+    tabs = st.tabs(["About", "Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
