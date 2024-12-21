@@ -1,157 +1,133 @@
 import streamlit as st
 import numpy as np
-import pandas as pd
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
-from sklearn.preprocessing import StandardScaler
 import os
-import io
 
-import streamlit as st
+# Streamlit page configuration
+st.set_page_config(
+    page_title="Deepfake Detection",
+    page_icon="🕵️‍♂️",
+    layout="wide",
+    initial_sidebar_state="expanded"
+)
 
-import streamlit as st
-
-# Streamlit style 
+# Custom CSS for styling
 st.markdown(
     """
     <style>
     .stApp {
         background-image: url('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/background.jpg');
         background-size: cover;
-        background-position: center center;
+        background-position: center;
+        font-family: Arial, sans-serif;
     }
-
     .title {
-        color: white; 
-        font-size: 50px; 
-        font-weight: bold; 
-        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7); 
+        font-size: 50px;
+        font-weight: bold;
+        color: #ffffff;
         text-align: center;
-        padding-top: 10px;
+        margin-top: 10px;
+        text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
-
     .sub-title {
         font-size: 22px;
         font-weight: bold;
-        text-align: left;
-        color: white;
-        padding-top: 3px;
-        margin-top: 20px
-    }
-
-    .highlight {
+        color: #ffffff;
         text-align: center;
-        margin-top: 20px;
+        margin-bottom: 30px;
+    }
+    .result {
         font-size: 24px;
         font-weight: bold;
-        color: red;
+        text-align: center;
+        margin-top: 20px;
     }
-
-    body {
-        color: white;  /* Set text color to white */
+    .report-btn {
+        margin-top: 20px;
     }
-    
-    .stButton>button {
-        color: white;  /* Set button text color to white */
-    }
-    .stFileUploader>label {
-        color: white;  /* Set file uploader label color to white */
-    }
-    .stFileUploader>div>div>div>span {
-        color: white;  /* Set the file name text color to white */
-    }
-    .stMarkdown, .stText, .stWrite, .stCode, .stCaption, .stSubheader, .stHeader {
-        color: white;  /* Set all other text elements to white */
-    }
-
     </style>
     """, unsafe_allow_html=True
 )
 
-# Title with custom styling
-st.markdown('<div class="title">Welcome to Deepfake Detection</div>', unsafe_allow_html=True)
+# Title Section
+st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Ensuring authenticity in the digital world</div>', unsafe_allow_html=True)
+st.image("DeepfakeBanner.jpg", use_container_width=True)
 
-# Image
-st.image('DeepfakeBanner.jpg', use_container_width =True)
-
-# Highlight message
-st.markdown('<div class="highlight">Seeing is no longer believing.</div>', unsafe_allow_html=True)
-
-
-
-
-# Model Loading Function
+# Model Loading
+@st.cache_resource
 def load_deepfake_model(model_path):
-    """Loads a Keras model from the specified path."""
+    """Load the deepfake detection model."""
     if os.path.exists(model_path):
         try:
             model = load_model(model_path)
             return model, None
         except Exception as e:
             return None, f"Failed to load the model. Error: {e}"
-    else:
-        return None, "The model file does not exist. Please check the path."
+    return None, "Model file not found. Please check the path."
 
-
-# Image Preprocessing Function
+# Image Preprocessing
 def preprocess_image(image_file, target_size=(224, 224)):
-    """Preprocess the uploaded image for deepfake detection."""
+    """Preprocess the image for model prediction."""
     try:
-        # Load image
         image = load_img(image_file, target_size=target_size)
-        
-        # Convert image to numpy array
-        image_array = img_to_array(image) 
-        
-        # Normalize image array (scale pixel values between 0 and 1)
-        image_array = image_array / 255.0 
-        
-        # Add batch dimension to the image
-        image_array = np.expand_dims(image_array, axis=0)
-        return image_array
+        image_array = img_to_array(image) / 255.0
+        return np.expand_dims(image_array, axis=0)
     except Exception as e:
-        st.error(f"Error processing the image: {e}")
+        st.error(f"Error processing image: {e}")
         return None
 
+# Report Fake Image
+def report_fake_image(image_file):
+    """Simulate reporting a deepfake image."""
+    st.success("Thank you for reporting. We will use this image for future training.")
 
-# Prediction Logic
+# Main Functionality
 def main():
-
     # Load the model
-    model_path = 'improved_vgg16.keras'  # Change this to your model's path
+    model_path = 'improved_vgg16.keras'  # Update with your model path
     model, model_error = load_deepfake_model(model_path)
 
     if model_error:
         st.error(model_error)
         return
 
-    # File uploader for image
-    uploaded_file = st.file_uploader("Upload your file", type=["jpg", "jpeg", "png"])
+    # About Section
+    st.sidebar.title("About")
+    st.sidebar.info(
+        """
+        This tool uses AI to detect whether an uploaded image is real or fake (deepfake).
+        Your participation helps us improve our detection algorithms.
+        """
+    )
 
-    if uploaded_file is not None:
-        # Display the uploaded image
-        st.image(uploaded_file, caption="Uploaded Image", use_container_width =True)
+    # File Upload
+    uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
-        # Preprocess the image
+    if uploaded_file:
+        st.image(uploaded_file, caption="Uploaded Image", use_column_width=True)
         image_array = preprocess_image(uploaded_file)
 
-        if st.button("Submit"):
+        # Prediction
+        if st.button("Detect Deepfake"):
             if image_array is not None and model is not None:
-                st.write("Running deepfake detection...")
-
-                try:
-                    # Predict with the model
-                    prediction = model.predict(image_array)
-
-                    # Assuming the model outputs 0 for real and 1 for fake
-                    if prediction[0][0] > 0.5:
-                        st.write("This is a **fake** image.")
-                    else:
-                        st.write("This is a **real** image.")
-                    st.success("Detection completed!")
-                except Exception as e:
-                    st.error(f"Error during prediction: {e}")
-
+                with st.spinner("Analyzing the image..."):
+                    try:
+                        prediction = model.predict(image_array)[0][0]
+                        if prediction > 0.5:
+                            result = "This is a **fake** image."
+                            st.markdown(f'<div class="result">{result}</div>', unsafe_allow_html=True)
+                            agree = st.radio("Would you like to report this image as a deepfake?", ["Yes", "No"], index=1)
+                            if agree == "Yes":
+                                report_fake_image(uploaded_file)
+                        else:
+                            result = "This is a **real** image."
+                            st.markdown(f'<div class="result">{result}</div>', unsafe_allow_html=True)
+                    except Exception as e:
+                        st.error(f"Error during prediction: {e}")
+            else:
+                st.warning("Please upload a valid image.")
 
 if __name__ == "__main__":
     main()
