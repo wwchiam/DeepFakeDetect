@@ -126,7 +126,7 @@ st.markdown(
 )
 
 # Tabs Layout
-tabs = st.tabs(["About", "Detection", "Contact Us"])
+# tabs = st.tabs(["About", "Detection", "Contact Us"])
 
 # Close the divs
 st.markdown("""
@@ -183,7 +183,7 @@ def main():
         return
 
     # Tab Layout
-    # tabs = st.tabs(["About", "Detection","Contact Us"])
+    tabs = st.tabs(["About", "Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
