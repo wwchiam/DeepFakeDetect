@@ -54,6 +54,9 @@ st.markdown(
         /* Force tabs to stay on the same line as the image */
         order: 1;
     }
+    #tabs_wrapper {
+        width: 100%;
+    }
     /* Ensure tabs are at the top of their container */
     .tabs-container .stTabs {
         margin-top: 0;
@@ -129,7 +132,6 @@ st.markdown(
 # st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
-# Title Section
 st.markdown(
     """
     <div class="title-container">
@@ -145,10 +147,11 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Tabs Layout - Here's the key: Ensure tabs are created within the right div
+# Move tabs creation inside the tabs-container
+st.markdown('<div id="tabs_wrapper">', unsafe_allow_html=True)
 tabs = st.tabs(["About", "Detection", "Contact Us"])
+st.markdown('</div>', unsafe_allow_html=True)
 
-# Close the divs
 st.markdown("""
         </div>
     </div>
