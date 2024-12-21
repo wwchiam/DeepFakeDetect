@@ -50,7 +50,7 @@ st.markdown(
 
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Ensuring authenticity in the digital world</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 st.image("DeepfakeBanner.jpg", use_container_width=True)
 
 # Model Loading
@@ -107,19 +107,19 @@ def main():
     # About Tab
     with tabs[0]:
         st.subheader("Objective")
-        st.write("The goal of this application is to detect deepfake images with high accuracy and provide a user-friendly interface for detection.")
+        st.write("Still thinking what to write... ")
         
         st.subheader("Who Built This?")
-        st.write("This application was developed by [Your Name or Organization]. It is powered by a deep learning model trained on a dataset of real and fake images.")
+        st.write("Still thinking what to write... ")
         
         st.subheader("Based On")
-        st.write("The model uses state-of-the-art techniques in computer vision and deep learning, specifically leveraging a modified VGG-16 architecture.")
+        st.write("Still thinking what to write... ")
         
         st.subheader("Training Results")
         st.write("""
-        - **Accuracy**: 95.7% on the validation dataset.
-        - **Precision**: 94.5%
-        - **Recall**: 96.2%
+        - **Accuracy**: XXX on the validation dataset.
+        - **Precision**: XXX%
+        - **Recall**: XXX%
         """)
 
     # Detection Tab
