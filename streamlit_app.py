@@ -35,7 +35,7 @@ st.markdown(
     
     /* Ensure the image itself spans the full width of the container */
     .stImageContainer img {
-        width: 100% !important;   /* Stretch the image to 100% of the container */
+        width: 200px!important;   /* Stretch the image to 100% of the container */
         height: auto !important;  /* Maintain aspect ratio */
         display: block !important; /* Remove extra space below the image */
         margin: 0 auto !important; /* Center the image */
