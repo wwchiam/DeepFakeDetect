@@ -147,14 +147,13 @@ st.markdown(
     unsafe_allow_html=True
 )
 
-# Close the tabs-container, create tabs, then reopen the container
-st.markdown('</div>', unsafe_allow_html=True)
+# Create tabs within the tabs-container context
 tabs = st.tabs(["About", "Detection", "Contact Us"])
-st.markdown('<div class="tabs-container">', unsafe_allow_html=True)
 
+# Close the tabs-container and content-row
 st.markdown("""
-        </div> <!-- This closes the second tabs-container -->
-    </div>   <!-- This closes the content-row -->
+        </div>
+    </div>
 """, unsafe_allow_html=True)
 
 # Model Loading
