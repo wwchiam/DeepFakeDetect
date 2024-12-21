@@ -84,7 +84,7 @@ st.markdown(
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg"
+st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Model Loading
 @st.cache_resource
