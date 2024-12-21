@@ -29,10 +29,10 @@ st.markdown(
     .banner-image {
         display: flex;
         justify-content: center;
-        margin-bottom: 20px; /* Space below the image */
+        margin-bottom: 20px;
     }
     .banner-image img {
-        max-width: 80%; /* Adjust as needed */
+        max-width: 80%;
         height: auto;
     }
     .title {
@@ -97,7 +97,8 @@ st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsaf
 
 # Banner Image
 st.markdown('<div class="banner-image">', unsafe_allow_html=True)
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg', use_column_width=False)
+# Change use_column_width to use_container_width
+st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg', use_container_width=True)
 st.markdown('</div>', unsafe_allow_html=True)
 
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
