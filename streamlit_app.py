@@ -46,18 +46,6 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
-    /* Center the banner image */
-    .banner-image {
-        display: flex;
-        justify-content: center;
-        margin-bottom: 20px;
-    }
-
-    .banner-image img {
-    width: 50%; 
-    max-height: 300px; /* Optionally limit the height */
-    object-fit: contain; /* Ensure the image retains its proportions */
-}
     /* Center tabs */
     .stTabs div[role="tablist"] {
         justify-content: center !important;
@@ -83,11 +71,6 @@ st.markdown(
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-
-# Center and adjust the banner size
-st.markdown('<div class="banner-image">', unsafe_allow_html=True)
-st.image("DeepfakeBanner.jpg", use_container_width=false, width=200) 
-st.markdown('</div>', unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
@@ -183,10 +166,9 @@ def main():
                 else:
                     st.warning("Please upload a valid image.")
     # Contact us Tab
-        with tabs[2]:
-            st.subheader("Need Help?")
-            st.write("Email to xxx for more information")
-            
+    with tabs[2]:
+        st.subheader("Need Help?")
+        st.write("Email to xxx for more information")
 
 if __name__ == "__main__":
     main()
