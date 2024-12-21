@@ -15,43 +15,39 @@ if "current_page" not in st.session_state:
 # Main Layout Split into Two Columns
 col1, col2 = st.columns([1, 2])
 
-# Left Column: Banner & Navigation Section
+# Left Column: Banner & Navigation Section inside the same Green Box
 with col1:
-    # Banner Image Section
+    # Green Box Container for Banner, Title, Subtitle, and Navigation Buttons
     st.markdown(
         """
-        <div style="background-color: #002d26; padding: 40px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
+        <div style="background-color: #004c40; padding: 40px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
             <h1 style="color: #ffffff; font-size: 2.5rem;">Deepfake Detector</h1>
             <p style="color: #d4f0e2; font-size: 1rem; margin-top: 20px;">
                 Seeing is no longer believing. Protect yourself from fake images with AI Solution.
             </p>
+            
+            <!-- Banner Image -->
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" 
+                     style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
+            </div>
+            
+            <!-- Navigation Buttons in a Row -->
+            <div style="display: flex; justify-content: center; gap: 20px;">
+                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
+                    Home
+                </button>
+                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
+                    About Us
+                </button>
+                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
+                    Contact Us
+                </button>
+            </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
-
-    # Banner Image
-    st.markdown(
-        """
-        <div style="text-align: center; margin-bottom: 20px;">
-            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" 
-                 style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-    # Navigation Buttons in a Row
-    button_col1, button_col2, button_col3 = st.columns(3)
-    with button_col1:
-        if st.button("Home"):
-            st.session_state["current_page"] = "Home"
-    with button_col2:
-        if st.button("About Us"):
-            st.session_state["current_page"] = "About Us"
-    with button_col3:
-        if st.button("Contact Us"):
-            st.session_state["current_page"] = "Contact Us"
 
 # Right Column: Content Based on Current Page
 with col2:
