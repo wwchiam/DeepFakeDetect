@@ -1,4 +1,5 @@
 import streamlit as st
+from streamlit_navigation_bar import st_navbar
 import time
 
 # Page configuration
@@ -8,6 +9,8 @@ st.set_page_config(
     layout="wide",
     initial_sidebar_state="expanded"
 )
+
+##########################################################################################################################
 
 # Initialize session state for navigation
 if "current_page" not in st.session_state:
@@ -34,28 +37,38 @@ with col1:
         unsafe_allow_html=True,
     )
 
-# Navigation buttons at the top of the page
-st.markdown(
-    """
-    <div style="display: flex; justify-content: flex-start; margin-bottom: 20px;">
-        <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;" onclick="window.location.href='/home'">Home</button>
-        <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;" onclick="window.location.href='/about'">About Us</button>
-        <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="window.location.href='/help'">Help</button>
-    </div>
-    """, 
-    unsafe_allow_html=True
-)
-
 # Right Column: Content Based on Current Page
 with col2:
-    if st.button('Home'):
-        st.session_state["current_page"] = "Home"
-        st.write("Hello from Home!")
+    if st.session_state["current_page"] == "Home":
+        # Upload Section for Image Detection
+        st.subheader("Upload an Image for Detection")
+        uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
-    elif st.button('About Us'):
-        st.session_state["current_page"] = "About Us"
-        st.write("Hello from About Us!")
+        if uploaded_file:
+            st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
 
-    elif st.button('Help'):
-        st.session_state["current_page"] = "Help"
-        st.write("Hello from Help!")
+            if st.button("Detect Deepfake"):
+                with st.spinner("Detecting deepfake..."):
+                    time.sleep(2)  # Simulating a delay
+                    st.success("Deepfake detected!")
+
+    elif st.session_state["current_page"] == "About Us":
+        st.title("About Us")
+        st.markdown(
+            """
+            ### Company Profile
+            We are a cutting-edge AI company dedicated to combating deepfake technology and promoting digital authenticity. 
+            Our mission is to protect individuals and organizations from manipulated media by providing robust and accessible detection tools.
+            """
+        )
+
+    elif st.session_state["current_page"] == "Contact Us":
+        st.title("Contact Us")
+        st.markdown(
+            """
+            ### Reach Out
+            - **Email**: support@deepfakedetector.com
+            - **Phone**: +1-800-123-4567
+            - **Address**: 123 AI Boulevard, Silicon Valley, CA
+            """
+        )
