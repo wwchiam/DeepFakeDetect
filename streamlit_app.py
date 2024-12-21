@@ -25,26 +25,6 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
-
-    /* Ensure the image container is centered */
-    .stImageContainer {
-        display: flex !important;
-        justify-content: center !important;  /* Horizontal centering */
-        align-items: center !important;      /* Vertical centering */
-        height: 100% !important;             /* Ensures it fills the container */
-        padding: 0 !important;
-        margin: 0 !important;
-        width: 100% !important;              /* Ensure it takes up full available width */
-    }
-
-    /* Adjust the image to be responsive and centered */
-    .stImageContainer img {
-        max-width: 80% !important;  /* Set the image width to 80% of the container width */
-        height: auto !important;    /* Maintain aspect ratio */
-        display: block !important;  /* Removes extra space below the image */
-        margin-left: auto !important;
-        margin-right: auto !important;  /* Horizontally center the image */
-    }
     
     .title {
         font-size: 50px;
@@ -107,8 +87,6 @@ st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_h
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
 # Banner Image - No custom div needed, let Streamlit handle the structure
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
-
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Model Loading
