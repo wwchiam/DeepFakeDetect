@@ -8,14 +8,18 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Initialize session state for navigation
-if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "Home"
+# Header of the page
+st.markdown(
+    """
+    <div style="display: flex; justify-content: space-between; align-items: center; background-color: #ffffff; padding: 10px 20px; border-bottom: 2px solid #e6e6e6;">
+        <div style="display: flex; align-items: center;">
+            <h3 style="margin: 0; color: #002d26;">A project by <span style='color: #ff5733;'>Wei Wei</span></h3>
+        </div>
+    """,
+    unsafe_allow_html=True,
+)
 
-# Main Layout Split into Two Columns
-col1, col2 = st.columns([1.5, 2.5])  # Make column 1 slightly bigger
-
-# Display Navigation Buttons (in a row) at the Top
+# Navigation Buttons
 st.markdown(
     """
     <div style="text-align: center; margin-bottom: 20px;">
@@ -33,6 +37,15 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
+
+# Initialize session state for navigation
+if "current_page" not in st.session_state:
+    st.session_state["current_page"] = "Home"
+
+# Main Layout Split into Two Columns
+col1, col2 = st.columns([1.5, 2.5])  # Make column 1 slightly bigger
+
+
 # Left Column: Banner & Navigation Section inside the same Green Box
 with col1:
     # Green Box Container for Title, Subtitle, and Banner Image
@@ -43,11 +56,8 @@ with col1:
             <p style="color: #d4f0e2; font-size: 1.2rem; margin-top: 15px; font-style: italic;">
                 Seeing is no longer believing. Protect yourself from fake images with AI Solution.
             </p>
-            
-            <!-- Banner Image -->
-            <div style="text-align: center; margin-top: 20px;">
-                <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" 
-                     style="width: 100%; max-width: 100%; height: auto; border-radius: 15px; box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);" />
+            <div style="margin-top: 20px;">
+                    <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
             </div>
         </div>
         """,
