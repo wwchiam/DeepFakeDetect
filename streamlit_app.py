@@ -12,7 +12,6 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# Custom CSS for styling
 st.markdown(
     """
     <style>
@@ -22,7 +21,7 @@ st.markdown(
         background-position: center;
         font-family: Arial, sans-serif;
         font-size: 20px;
-        color: #ffffff; /* Set all text to white */
+        color: #ffffff;
     }
     .title {
         font-size: 50px;
@@ -46,27 +45,38 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
+
+    /* Adjusting the subheader font size */
+    .stSubheader {
+        font-size: 18px !important; /* You can change this value to adjust font size */
+        color: #ffffff !important;
+    }
+
     /* Center tabs */
     .stTabs div[role="tablist"] {
         justify-content: center !important;
     }
+
     /* Adjust tab headers to match Objective font size */
     .stTabs [role="tab"] {
         font-size: 22px !important;
         font-weight: bold !important;
         color: #ffffff !important;
     }
+
     /* Ensure tabs and content have white text */
     .css-1cpxqw2, .css-18e3th9, .css-1n76uvr {
         color: #ffffff !important;
     }
+
     /* Change file uploader text color */
     .stFileUploader label {
-        color: #ffffff !important; /* Change uploader label text to white */
+        color: #ffffff !important;
     }
     </style>
     """, unsafe_allow_html=True
 )
+
 
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
