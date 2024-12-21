@@ -15,7 +15,7 @@ if "current_page" not in st.session_state:
 # Main Layout Split into Two Columns
 col1, col2 = st.columns([1.5, 2.5])  # Make column 1 slightly bigger
 
-# Top Navigation Buttons (in a row)
+# Display Navigation Buttons (in a row) at the Top
 st.markdown(
     """
     <div style="text-align: center; margin-bottom: 20px;">
