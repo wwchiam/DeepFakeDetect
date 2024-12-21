@@ -24,19 +24,31 @@ st.markdown(
         font-family: Arial, sans-serif;
         font-size: 20px;
         color: #ffffff;
+        display: flex;
+        flex-direction: column; /* Changed to column to stack elements vertically */
+        align-items: center; /* Centers items horizontally */
     }
-    /* New styles for layout */
-    .stApp {
+    /* Style for title and subtitle */
+    .title-container {
+        width: 100%;
+        text-align: center;
+        margin-bottom: 20px; /* Space between title/subtitle and content below */
+    }
+    /* Main content area */
+    .content-row {
         display: flex;
         flex-direction: row;
+        width: 100%;
+        justify-content: space-between;
         align-items: flex-start;
     }
-    .stApp > div:nth-child(1) {
-        width: 50%; /* Adjust as needed */
-        padding-right: 20px; /* Space between image and tabs */
+    /* Image container */
+    .image-container {
+        width: 45%; /* Adjust as needed */
     }
-    .stApp > div:nth-child(2) {
-        width: 50%; /* Adjust as needed */
+    /* Tabs container */
+    .tabs-container {
+        width: 45%; /* Adjust as needed */
         display: flex;
         flex-direction: column;
     }
@@ -113,14 +125,15 @@ st.markdown(
 # Title Section
 st.markdown(
     """
-    <div style="display: flex; flex-direction: row;">
-        <div style="width: 50%;">
+    <div class="title-container">
+        <div class="title">Deepfake Detection System</div>
+        <div class="sub-title">Seeing is no longer believing</div>
+    </div>
+    <div class="content-row">
+        <div class="image-container">
             <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
         </div>
-        <div style="width: 50%;">
-            <div class="title">Deepfake Detection System</div>
-            <div class="sub-title">Seeing is no longer believing</div>
-            <div class="tabs-container">
+        <div class="tabs-container">
     """,
     unsafe_allow_html=True
 )
@@ -130,7 +143,6 @@ tabs = st.tabs(["About", "Detection", "Contact Us"])
 
 # Close the divs
 st.markdown("""
-            </div>
         </div>
     </div>
 """, unsafe_allow_html=True)
