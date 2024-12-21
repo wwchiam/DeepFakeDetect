@@ -1,5 +1,4 @@
 import streamlit as st
-import time
 
 # Page configuration
 st.set_page_config(
@@ -9,28 +8,61 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-##########################################################################################################################
-# Navigation Bar
+# Custom CSS for styling buttons
+st.markdown("""
+    <style>
+        .nav-button {
+            display: inline-block;
+            padding: 10px 20px;
+            margin: 5px;
+            background-color: #4CAF50;
+            color: white;
+            border-radius: 5px;
+            text-decoration: none;
+            text-align: center;
+            font-size: 16px;
+        }
+        .nav-button:hover {
+            background-color: #45a049;
+        }
+    </style>
+""", unsafe_allow_html=True)
 
-option = st.selectbox("", ("Home", "About Us", "Contact Us"))
+# Display custom top navigation buttons
+col1, col2, col3 = st.columns(3)
 
-if option == "About Us":
-    st.header("About Us")
-    st.write("""
-        Testing testing 
-    """)
+# Buttons for navigation
+with col1:
+    if st.button("Home"):
+        st.session_state.page = "Home"
+        
+with col2:
+    if st.button("About Us"):
+        st.session_state.page = "About Us"
+        
+with col3:
+    if st.button("Contact Us"):
+        st.session_state.page = "Contact Us"
 
-elif option == "Home":
+# If `st.session_state.page` is not set, set default to "Home"
+if "page" not in st.session_state:
+    st.session_state.page = "Home"
+
+# Display the corresponding content based on the button clicked
+if st.session_state.page == "Home":
     st.header("Our Product")
     st.write("""
-        Testing testing 
+        This is the Home section. Here we describe our main product or service.
     """)
 
-elif option == "Contact Us":
+elif st.session_state.page == "About Us":
+    st.header("About Us")
+    st.write("""
+        This is the About Us section. Here we introduce our platform and goals.
+    """)
+
+elif st.session_state.page == "Contact Us":
     st.header("Contact Us")
     st.write("""
-        Testing testing 
+        This is the Contact Us section. Feel free to reach out to us for more information.
     """)
-    
-
-##########################################################################################################################
