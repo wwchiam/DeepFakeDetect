@@ -1,5 +1,6 @@
 import streamlit as st
 from streamlit_navigation_bar import st_navbar
+import time
 
 # Page configuration
 st.set_page_config(
@@ -38,8 +39,19 @@ with col1:
 
 # Right Column: Content Based on Current Page
 with col2:
+    # Add buttons at the top of the page
+    st.markdown(
+        """
+        <div style="display: flex; justify-content: flex-start; margin-bottom: 20px;">
+            <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;" onclick="window.location.href='/home'">Home</button>
+            <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;" onclick="window.location.href='/about'">About Us</button>
+            <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="window.location.href='/help'">Help</button>
+        </div>
+        """, 
+        unsafe_allow_html=True
+    )
+
     if st.session_state["current_page"] == "Home":
-        # Upload Section for Image Detection
         st.subheader("Upload an Image for Detection")
         uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
@@ -48,7 +60,6 @@ with col2:
 
             if st.button("Detect Deepfake"):
                 with st.spinner("Detecting deepfake..."):
-                    # Add your detection logic here
                     time.sleep(2)  # Simulating a delay
                     st.success("Deepfake detected!")
 
@@ -62,13 +73,24 @@ with col2:
             """
         )
 
-    elif st.session_state["current_page"] == "Contact Us":
-        st.title("Contact Us")
+    elif st.session_state["current_page"] == "Help":
+        st.title("Help")
         st.markdown(
             """
-            ### Reach Out
-            - **Email**: support@deepfakedetector.com
-            - **Phone**: +1-800-123-4567
-            - **Address**: 123 AI Boulevard, Silicon Valley, CA
+            ### Hello!
+            This is the help section. You can get assistance with using our Deepfake Detection tool here.
             """
         )
+
+# Button Logic to Change Page
+if st.button('Home'):
+    st.session_state["current_page"] = "Home"
+    st.write("Hello")
+
+elif st.button('About Us'):
+    st.session_state["current_page"] = "About Us"
+    st.write("Hello")
+
+elif st.button('Help'):
+    st.session_state["current_page"] = "Help"
+    st.write("Hello")
