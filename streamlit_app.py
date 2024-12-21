@@ -37,7 +37,7 @@ st.markdown(
     
     /* Ensure the image itself spans the full width of the container */
     .stImageContainer img {
-        max-width: 80% !important;   /* Set maximum width for the image */
+        max-width: 60% !important;   /* Set maximum width for the image */
         width: auto !important;      /* Auto adjust width according to the aspect ratio */
         height: auto !important;     /* Maintain aspect ratio */
         display: block !important;   /* Remove any extra space below the image */
@@ -105,7 +105,7 @@ st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_h
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
 # Banner Image - No custom div needed, let Streamlit handle the structure
-st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg', use_container_width=True)
+st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
