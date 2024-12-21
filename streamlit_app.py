@@ -45,13 +45,23 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
+    /* Adjust tab headers */
+    .stTabs [role="tab"] {
+        font-size: 20px !important;
+        color: #ffffff !important; /* Set tab headers to white */
+    }
     /* Ensure tabs and content have white text */
-    .css-1cpxqw2, .css-18e3th9, .css-1n76uvr { /* Adjust based on Streamlit's class names for tabs and sidebar */
+    .css-1cpxqw2, .css-18e3th9, .css-1n76uvr {
         color: #ffffff !important;
+    }
+    /* Change file uploader text color */
+    .stFileUploader label {
+        color: #ffffff !important; /* Change uploader label text to white */
     }
     </style>
     """, unsafe_allow_html=True
 )
+
 
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
