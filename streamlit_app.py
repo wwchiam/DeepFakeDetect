@@ -32,7 +32,7 @@ st.markdown(
         margin-bottom: 20px;
     }
     .banner-image img {
-        max-width: 50%;
+         width: 400px;
         height: auto;
     }
     .title {
