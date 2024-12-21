@@ -44,27 +44,23 @@ st.markdown(
     }
     /* Image container */
     .image-container {
-        width: 50%; /* Adjust as needed */
+        width: 40%; /* Adjust as needed */
     }
     /* Tabs container */
     .tabs-container {
-        width: 50%; /* Adjust as needed */
+        width: 45%; /* Match the width of image container */
         display: flex;
         flex-direction: column;
-        /* Force tabs to stay on the same line as the image */
-        order: 1;
+        align-items: flex-start; /* Ensure tabs start at the top */
     }
-    #tabs_wrapper {
-        width: 100%;
+    /* Streamlit specific adjustments */
+    .tabs-container .stTabs {
+        width: 100%; /* Ensure tabs take full width of container */
     }
     /* Ensure tabs are at the top of their container */
     .tabs-container .stTabs {
         margin-top: 0;
         width: 100%; /* Ensure tabs take up full width of their container */
-    }
-    /* Ensure tabs are aligned at the top with the image */
-    .stTabs {
-        margin-top: 0;
     }
     /* Adjust image display */
     .stImage > img {
@@ -201,12 +197,12 @@ def main():
         <div class="title-container">
             <div class="title">Deepfake Detection System</div>
             <div class="sub-title">Seeing is no longer believing</div>
+    </div>
+    <div class="content-row">
+        <div class="image-container">
+            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
         </div>
-        <div class="content-row">
-            <div class="image-container">
-                <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
-            </div>
-            <div class="tabs-container">
+        <div class="tabs-container">
         """,
         unsafe_allow_html=True
     )
