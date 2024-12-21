@@ -45,6 +45,10 @@ st.markdown(
         margin-top: 20px;
         color: #ffffff;
     }
+    /* Center tabs */
+    .stTabs div[role="tablist"] {
+        justify-content: center !important;
+    }
     /* Adjust tab headers to match Objective font size */
     .stTabs [role="tab"] {
         font-size: 22px !important;
@@ -67,8 +71,8 @@ st.markdown(
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
-# Banner
-st.image("DeepfakeBanner.jpg", use_container_width=False, width=800)  # Adjust width to 50% of the original
+# Center the banner and reduce its size by 50%
+st.image("DeepfakeBanner.jpg", use_container_width=False, width=800, caption=None)
 
 # Model Loading
 @st.cache_resource
