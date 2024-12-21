@@ -19,23 +19,12 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-# Navigation Buttons
-st.markdown(
-    """
-    <div style="text-align: center; margin-bottom: 20px;">
-        <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1rem; margin: 0 10px; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);" onclick="window.location.href='#'">
-            Home
-        </button>
-        <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1rem; margin: 0 10px; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);" onclick="window.location.href='#'">
-            About Us
-        </button>
-        <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 25px; cursor: pointer; font-size: 1.1rem; margin: 0 10px; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);" onclick="window.location.href='#'">
-            Contact Us
-        </button>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
+
+import streamlit as st
+from streamlit_navigation_bar import st_navbar
+
+page = st_navbar(["Detection", "About Us", "Contact Us")
+st.write(page)
 
 
 # Initialize session state for navigation
