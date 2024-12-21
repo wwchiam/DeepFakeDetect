@@ -8,13 +8,13 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Custom CSS for styling buttons
+# Custom CSS for styling buttons (closer spacing)
 st.markdown("""
     <style>
         .nav-button {
             display: inline-block;
-            padding: 10px 20px;
-            margin: 5px;
+            padding: 10px 15px;  /* Reduced padding */
+            margin: 0 5px;       /* Reduced margin between buttons */
             background-color: #4CAF50;
             color: white;
             border-radius: 5px;
@@ -33,15 +33,15 @@ col1, col2, col3 = st.columns(3)
 
 # Buttons for navigation
 with col1:
-    if st.button("Home"):
+    if st.button("Home", key="home"):
         st.session_state.page = "Home"
         
 with col2:
-    if st.button("About Us"):
+    if st.button("About Us", key="about"):
         st.session_state.page = "About Us"
         
 with col3:
-    if st.button("Contact Us"):
+    if st.button("Contact Us", key="contact"):
         st.session_state.page = "Contact Us"
 
 # If `st.session_state.page` is not set, set default to "Home"
