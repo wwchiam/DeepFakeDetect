@@ -15,8 +15,9 @@ if "current_page" not in st.session_state:
 # Main Layout Split into Two Columns
 col1, col2 = st.columns([1, 2])
 
-# Left Column: Navigation & Title Section
+# Left Column: Banner & Navigation Section
 with col1:
+    # Banner Image Section
     st.markdown(
         """
         <div style="background-color: #002d26; padding: 40px; border-radius: 10px; margin-bottom: 20px; text-align: center;">
@@ -29,28 +30,32 @@ with col1:
         unsafe_allow_html=True,
     )
 
-    st.sidebar.title("Navigation")
-    if st.sidebar.button("Home"):
-        st.session_state["current_page"] = "Home"
-    if st.sidebar.button("About Us"):
-        st.session_state["current_page"] = "About Us"
-    if st.sidebar.button("Contact Us"):
-        st.session_state["current_page"] = "Contact Us"
+    # Banner Image
+    st.markdown(
+        """
+        <div style="text-align: center; margin-bottom: 20px;">
+            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" 
+                 style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    # Navigation Buttons in a Row
+    button_col1, button_col2, button_col3 = st.columns(3)
+    with button_col1:
+        if st.button("Home"):
+            st.session_state["current_page"] = "Home"
+    with button_col2:
+        if st.button("About Us"):
+            st.session_state["current_page"] = "About Us"
+    with button_col3:
+        if st.button("Contact Us"):
+            st.session_state["current_page"] = "Contact Us"
 
 # Right Column: Content Based on Current Page
 with col2:
     if st.session_state["current_page"] == "Home":
-        # Banner Image Section
-        st.markdown(
-            """
-            <div style="text-align: center; margin-bottom: 20px;">
-                <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" 
-                     style="width: 100%; max-width: 100%; height: auto; border-radius: 10px;" />
-            </div>
-            """,
-            unsafe_allow_html=True,
-        )
-
         # Upload Section for Image Detection
         st.subheader("Upload an Image for Detection")
         uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
