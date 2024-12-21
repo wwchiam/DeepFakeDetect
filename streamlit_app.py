@@ -24,48 +24,6 @@ st.markdown(
         font-family: Arial, sans-serif;
         font-size: 20px;
         color: #ffffff;
-        display: flex;
-        flex-direction: column; /* Changed to column to stack elements vertically */
-        align-items: center; /* Centers items horizontally */
-    }
-    /* Style for title and subtitle */
-    .title-container {
-        width: 100%;
-        text-align: center;
-        margin-bottom: 20px; /* Space between title/subtitle and content below */
-    }
-    /* Main content area */
-    .content-row {
-        display: flex;
-        flex-direction: row;
-        width: 100%;
-        justify-content: space-between;
-        align-items: flex-start;
-    }
-    /* Image container */
-    .image-container {
-        width: 40%; /* Adjust as needed */
-    }
-    /* Tabs container */
-    .tabs-container {
-        width: 45%; /* Match the width of image container */
-        display: flex;
-        flex-direction: column;
-        align-items: flex-start; /* Ensure tabs start at the top */
-    }
-    /* Streamlit specific adjustments */
-    .tabs-container .stTabs {
-        width: 100%; /* Ensure tabs take full width of container */
-    }
-    /* Ensure tabs are at the top of their container */
-    .tabs-container .stTabs {
-        margin-top: 0;
-        width: 100%; /* Ensure tabs take up full width of their container */
-    }
-    /* Adjust image display */
-    .stImage > img {
-        width: 100%;
-        height: auto;
     }
     .title {
         font-size: 50px;
@@ -124,33 +82,9 @@ st.markdown(
 ###################################################################################################################################
 
 # Title Section
-# st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
-# st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
-# st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
-
-# st.markdown(
-#    """
-#    <div class="title-container">
-#        <div class="title">Deepfake Detection System</div>
-#        <div class="sub-title">Seeing is no longer believing</div>
-#    </div>
-#    <div class="content-row">
-#        <div class="image-container">
-#            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
-#        </div>
-#        <div class="tabs-container">
-#    """,
-#    unsafe_allow_html=True
-#)
-
-# Create tabs within the tabs-container context
-# tabs = st.tabs(["About", "Detection", "Contact Us"])
-
-# Close the tabs-container and content-row
-# st.markdown("""
-#        </div>
-#    </div>
-# """, unsafe_allow_html=True)
+st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
+st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Model Loading
 @st.cache_resource
@@ -192,23 +126,6 @@ def fancy_detection(image_file, prediction, threshold=0.5):
 
 # Main Functionality
 def main():
-    st.markdown(
-        """
-        <div class="title-container">
-            <div class="title">Deepfake Detection System</div>
-            <div class="sub-title">Seeing is no longer believing</div>
-    </div>
-    <div class="content-row">
-        <div class="image-container">
-            <img src="https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg" alt="Deepfake Banner" style="width: 100%; height: auto;">
-        </div>
-        <div class="tabs-container">
-        """,
-        unsafe_allow_html=True
-    )
-    
-    tabs = st.tabs(["About", "Detection", "Contact Us"])
-    
     # Load the model
     model_path = 'improved_vgg16.keras' 
     model, model_error = load_deepfake_model(model_path)
@@ -218,7 +135,7 @@ def main():
         return
 
     # Tab Layout
-    # tabs = st.tabs(["About", "Detection","Contact Us"])
+    tabs = st.tabs(["About", "Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
