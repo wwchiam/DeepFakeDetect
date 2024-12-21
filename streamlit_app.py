@@ -9,9 +9,6 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-page = st_navbar(["About Us", "Contact Us"])
-st.write(page)
-
 ##########################################################################################################################
 
 # Initialize session state for navigation
