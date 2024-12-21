@@ -126,13 +126,14 @@ st.markdown(
 )
 
 # Tabs Layout
-# tabs = st.tabs(["About", "Detection", "Contact Us"])
+tabs = st.tabs(["About", "Detection", "Contact Us"])
 
 # Close the divs
 st.markdown("""
             </div>
         </div>
     </div>
+""", unsafe_allow_html=True)
 
 # Model Loading
 @st.cache_resource
@@ -183,7 +184,7 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Detection","Contact Us"])
+    # tabs = st.tabs(["About", "Detection","Contact Us"])
     
     # About Tab
     with tabs[0]:
