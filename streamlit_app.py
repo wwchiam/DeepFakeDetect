@@ -23,7 +23,7 @@ st.markdown(
         font-family: Arial, sans-serif;
     }
     .title {
-        font-size: 50px;
+        font-size: 36px;
         font-weight: bold;
         color: #ffffff;
         text-align: center;
@@ -31,17 +31,36 @@ st.markdown(
         text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
     }
     .sub-title {
-        font-size: 22px;
+        font-size: 18px;
         font-weight: bold;
         color: #ffffff;
         text-align: center;
-        margin-bottom: 30px;
+        margin-bottom: 20px;
+    }
+    .banner {
+        height: 200px;
+        width: auto;
+        margin: auto;
+        display: block;
+    }
+    .tabs-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
     }
     .result, .report {
-        font-size: 24px;
+        font-size: 20px;
         font-weight: bold;
         text-align: center;
         margin-top: 20px;
+        color: #ffffff;
+    }
+    .image-display {
+        max-height: 300px;
+        margin: auto;
+        display: block;
+    }
+    .stMarkdown {
         color: #ffffff;
     }
     </style>
@@ -51,7 +70,7 @@ st.markdown(
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Ensuring authenticity in the digital world</div>', unsafe_allow_html=True)
-st.image("DeepfakeBanner.jpg", use_container_width=True)
+st.image("DeepfakeBanner.jpg", use_column_width=True, caption="A Comprehensive Deepfake Detection Tool", class_="banner")
 
 # Model Loading
 @st.cache_resource
@@ -84,7 +103,7 @@ def report_fake_image():
 # Fancy Detection (Bounding Box and Probability Display)
 def fancy_detection(image_file, prediction, threshold=0.5):
     """Simulate bounding box display and fake probability."""
-    st.image(image_file, caption="Detected Face", use_container_width=True)
+    st.image(image_file, caption="Detected Face", class_="image-display")
     probability = round(prediction[0][0] * 100, 2)
     if prediction[0][0] > threshold:
         st.markdown(f'<div class="result">This is a **fake** image. Probability: {probability}%</div>', unsafe_allow_html=True)
@@ -101,8 +120,10 @@ def main():
         st.error(model_error)
         return
 
-    # Tab Layout
-    tabs = st.tabs(["About", "Start Detection"])
+    # Tab Layout with Center Alignment
+    st.markdown('<div class="tabs-container">', unsafe_allow_html=True)
+    tabs = st.tabs(["About", "Start Detection", "Contact Us"])
+    st.markdown('</div>', unsafe_allow_html=True)
     
     # About Tab
     with tabs[0]:
@@ -128,7 +149,7 @@ def main():
         uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
         if uploaded_file:
-            st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+            st.image(uploaded_file, caption="Uploaded Image", class_="image-display")
             image_array = preprocess_image(uploaded_file)
 
             # Prediction
@@ -146,6 +167,11 @@ def main():
                             st.error(f"Error during prediction: {e}")
                 else:
                     st.warning("Please upload a valid image.")
+
+    # Contact Us Tab
+    with tabs[2]:
+        st.subheader("Need Help?")
+        st.write("If you have any questions or need support, please email us at **help@example.com**. We are here to assist you!")
 
 if __name__ == "__main__":
     main()
