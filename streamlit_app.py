@@ -9,7 +9,7 @@ st.set_page_config(
     page_title="Deepfake Detection",
     page_icon="🕵️‍♂️",
     layout="wide",
-    initial_sidebar_state="expanded"
+    initial_sidebar_state="auto"
 )
 
 # Custom CSS for styling
@@ -39,7 +39,7 @@ st.markdown(
         margin-bottom: 30px;
     }
     .result, .report {
-        font-size: 24px;
+        font-size: 22px;
         font-weight: bold;
         text-align: center;
         margin-top: 20px;
@@ -51,6 +51,12 @@ st.markdown(
         justify-content: center;
         margin-bottom: 20px;
     }
+
+    .banner-image img {
+    width: 50%; 
+    max-height: 300px; /* Optionally limit the height */
+    object-fit: contain; /* Ensure the image retains its proportions */
+}
     /* Center tabs */
     .stTabs div[role="tablist"] {
         justify-content: center !important;
