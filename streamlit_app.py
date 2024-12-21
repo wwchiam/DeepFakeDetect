@@ -1,5 +1,4 @@
 import streamlit as st
-from streamlit_navigation_bar import st_navbar
 import time
 
 # Page configuration
@@ -14,7 +13,18 @@ st.set_page_config(
 
 # Initialize session state for navigation
 if "current_page" not in st.session_state:
-    st.session_state["current_page"] = "Home"
+    st.session_state["current_page"] = "Home"  # Default page is Home
+
+# Add Home and About Us buttons at the top
+st.markdown(
+    """
+    <div style="display: flex; justify-content: flex-start; margin-bottom: 20px;">
+        <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer; margin-right: 10px;" onclick="window.location.href='/home'">Home</button>
+        <button style="background-color: #004d40; color: white; border: none; padding: 10px 20px; font-size: 16px; cursor: pointer;" onclick="window.location.href='/about'">About Us</button>
+    </div>
+    """, 
+    unsafe_allow_html=True
+)
 
 # Main Layout Split into Two Columns
 col1, col2 = st.columns([1.5, 2.5])  # Adjust column widths as needed
@@ -62,13 +72,11 @@ with col2:
             """
         )
 
-    elif st.session_state["current_page"] == "Contact Us":
-        st.title("Contact Us")
-        st.markdown(
-            """
-            ### Reach Out
-            - **Email**: support@deepfakedetector.com
-            - **Phone**: +1-800-123-4567
-            - **Address**: 123 AI Boulevard, Silicon Valley, CA
-            """
-        )
+# Button Logic to Change Page
+if st.button('Home'):
+    st.session_state["current_page"] = "Home"
+    st.write("You are on the Home page.")
+
+elif st.button('About Us'):
+    st.session_state["current_page"] = "About Us"
+    st.write("You are on the About Us page.")
