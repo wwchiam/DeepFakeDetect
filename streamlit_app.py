@@ -9,18 +9,7 @@ st.set_page_config(
     initial_sidebar_state="expanded"
 )
 
-# Header of the page
-st.markdown(
-    """
-    <div style="display: flex; justify-content: space-between; align-items: center; background-color: #ffffff; padding: 10px 20px; border-bottom: 2px solid #e6e6e6;">
-        <div style="display: flex; align-items: center;">
-            <h3 style="margin: 0; color: #002d26;">A project by <span style='color: #ff5733;'>Wei Wei</span></h3>
-        </div>
-    """,
-    unsafe_allow_html=True,
-)
-
-page = st_navbar(["Home", "About Us", "Contact Us"])
+page = st_navbar(["About Us", "Contact Us"])
 st.write(page)
 
 ##########################################################################################################################
