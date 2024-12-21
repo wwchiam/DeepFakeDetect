@@ -29,16 +29,19 @@ st.markdown(
     /* Make sure the image container takes up the full width */
     .stImageContainer {
         width: 100% !important; /* Ensure the container spans the full width */
+        display: flex !important;   /* Use flexbox to center the content */
+        justify-content: center !important; /* Center the image */
         padding: 0 !important;   /* Remove any padding */
         margin: 0 !important;    /* Remove any margin */
     }
     
     /* Ensure the image itself spans the full width of the container */
     .stImageContainer img {
-        width: 200px!important;   /* Stretch the image to 100% of the container */
-        height: auto !important;  /* Maintain aspect ratio */
-        display: block !important; /* Remove extra space below the image */
-        margin: 0 auto !important; /* Center the image */
+        max-width: 80% !important;   /* Set maximum width for the image */
+        width: auto !important;      /* Auto adjust width according to the aspect ratio */
+        height: auto !important;     /* Maintain aspect ratio */
+        display: block !important;   /* Remove any extra space below the image */
+        margin: 0 auto !important;   /* Center the image horizontally */
     }
     
     .title {
