@@ -12,7 +12,7 @@ st.set_page_config(
 ##########################################################################################################################
 # Navigation Bar
 
-option = st.selectbox( ("Home", "About Us", "Contact Us"), horizontal=True)
+option = st.selectbox("", ("Home", "About Us", "Contact Us"))
 
 if option == "About Us":
     st.header("About Us")
