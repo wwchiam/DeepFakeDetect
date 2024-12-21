@@ -21,6 +21,7 @@ st.markdown(
         background-size: cover;
         background-position: center;
         font-family: Arial, sans-serif;
+        color: #ffffff; /* Set all text to white */
     }
     .title {
         font-size: 50px;
@@ -43,6 +44,10 @@ st.markdown(
         text-align: center;
         margin-top: 20px;
         color: #ffffff;
+    }
+    /* Ensure tabs and content have white text */
+    .css-1cpxqw2, .css-18e3th9, .css-1n76uvr { /* Adjust based on Streamlit's class names for tabs and sidebar */
+        color: #ffffff !important;
     }
     </style>
     """, unsafe_allow_html=True
