@@ -33,21 +33,22 @@ with col1:
             </div>
             
             <!-- Navigation Buttons in a Row -->
-            <div style="display: flex; justify-content: center; gap: 20px;">
-                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
-                    Home
-                </button>
-                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
-                    About Us
-                </button>
-                <button style="padding: 10px 20px; background-color: #00796b; color: white; border: none; border-radius: 5px; cursor: pointer;" onclick="window.location.href='#'">
-                    Contact Us
-                </button>
-            </div>
         </div>
         """,
         unsafe_allow_html=True,
     )
+
+    # Streamlit Buttons for Navigation
+    col1_buttons = st.columns(3)
+    with col1_buttons[0]:
+        if st.button("Home"):
+            st.session_state["current_page"] = "Home"
+    with col1_buttons[1]:
+        if st.button("About Us"):
+            st.session_state["current_page"] = "About Us"
+    with col1_buttons[2]:
+        if st.button("Contact Us"):
+            st.session_state["current_page"] = "Contact Us"
 
 # Right Column: Content Based on Current Page
 with col2:
