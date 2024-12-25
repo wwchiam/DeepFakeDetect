@@ -3,7 +3,6 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import os
-import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.image import img_to_array
 from mtcnn import MTCNN
 from PIL import Image
@@ -44,8 +43,10 @@ def detect_face_and_heatmap(image):
     detector = MTCNN()
     faces = detector.detect_faces(image)
     
-    # Draw bounding boxes around faces (this time with PIL)
+    # Create a PIL Image from the array
     pil_image = Image.fromarray(image)
+    
+    # Draw bounding boxes around faces (with PIL drawing)
     for face in faces:
         x, y, w, h = face['box']
         pil_image = pil_image.crop((x, y, x + w, y + h))  # Crop the face region
@@ -63,12 +64,14 @@ def fancy_detection(image_file, prediction, image_array):
     else:
         st.markdown(f'<div class="result">This is a **real** image. Probability: {100 - probability}%</div>', unsafe_allow_html=True)
     
+    # Reload the uploaded image to preprocess it for detection
     uploaded_image = load_img(image_file, target_size=(224, 224))
     image_array = img_to_array(uploaded_image)
     image_array = np.array(image_array, dtype=np.uint8)
     
     detected_image, faces = detect_face_and_heatmap(image_array)
     
+    # Display the detected face (or the full image)
     st.image(detected_image, caption="Detected Face", use_container_width=True)
     st.markdown("<br><h4>Face Detected in Image</h4>", unsafe_allow_html=True)
 
@@ -81,7 +84,7 @@ def main():
         st.error(model_error)
         return
 
-    tabs = st.tabs(["About", "Detection","Deep Neural Network", "Contact Us"])
+    tabs = st.tabs(["About", "Detection", "Deep Neural Network", "Contact Us"])
     
     with tabs[0]:
         st.subheader("Detect Deepfakes Instantly")
