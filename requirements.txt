@@ -12,8 +12,5 @@ scikit-learn
 opencv-python
 mtcnn
 matplotlib
-opencv-python-headless==4.5.3.56
-streamlit==1.41.1
-keras==2.11.0
-numpy==1.23.0
+
 
