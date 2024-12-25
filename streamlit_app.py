@@ -4,8 +4,7 @@ from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import os
 from PIL import Image, ImageDraw, ImageOps
-import matplotlib.pyplot as plt
-from mtcnn import MTCNN
+from mtcnn import MTCNN  # For face detection
 
 # Page Title
 st.set_page_config(
