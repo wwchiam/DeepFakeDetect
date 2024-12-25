@@ -11,4 +11,4 @@ numpy
 scikit-learn
 opencv-python
 mtcnn
-matplotlib.pyplot
+matplotlib
