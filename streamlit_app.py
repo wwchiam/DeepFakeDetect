@@ -3,10 +3,8 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import os
-from PIL import Image, ImageDraw, ImageOps
-from mtcnn import MTCNN  # For face detection
 
-# Page Title
+# Page Title Appear at browser
 st.set_page_config(
     page_title="Deepfake Detection",
     page_icon="🕵️‍♂️",
@@ -14,7 +12,8 @@ st.set_page_config(
     initial_sidebar_state="auto"
 )
 
-# Global CSS for Styling
+# Global CSS
+
 st.markdown(
     """
     <style>
@@ -26,7 +25,7 @@ st.markdown(
         font-size: 20px;
         color: #ffffff;
     }
-
+    
     .title {
         font-size: 50px;
         font-weight: bold;
@@ -52,7 +51,7 @@ st.markdown(
 
     /* Adjusting the subheader font size */
     .stSubheader {
-        font-size: 18px !important; 
+        font-size: 18px !important; /* You can change this value to adjust font size */
         color: #ffffff !important;
     }
 
@@ -85,11 +84,15 @@ st.markdown(
 
 # Title Section
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
-st.markdown('<div class="sub-title">Seeing is no longer believing</div>', unsafe_allow_html=True)
+st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
+
+# Banner Image - No custom div needed, let Streamlit handle the structure
+# st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
 
 # Model Loading
 @st.cache_resource
 def load_deepfake_model(model_path):
+    """Load the deepfake detection model."""
     if os.path.exists(model_path):
         try:
             model = load_model(model_path)
@@ -100,61 +103,34 @@ def load_deepfake_model(model_path):
 
 # Image Preprocessing
 def preprocess_image(image_file, target_size=(224, 224)):
+    """Preprocess the image for model prediction."""
     try:
         image = load_img(image_file, target_size=target_size)
         image_array = img_to_array(image) / 255.0
-        return np.expand_dims(image_array, axis=0), image
+        return np.expand_dims(image_array, axis=0)
     except Exception as e:
         st.error(f"Error processing image: {e}")
-        return None, None
+        return None
 
-# Face Detection with MTCNN
-def detect_face_and_heatmap(image):
-    detector = MTCNN()
-    faces = detector.detect_faces(image)
-    
-    # Draw bounding boxes around faces
-    for face in faces:
-        x, y, w, h = face['box']
-        draw = ImageDraw.Draw(image)
-        draw.rectangle([x, y, x + w, y + h], outline="green", width=3)
-    
-    return image, faces
+# Report Fake Image
+def report_fake_image():
+    """Simulate reporting a deepfake image."""
+    st.success("Thank you for reporting. We will use this image for future training.")
 
 # Fancy Detection (Bounding Box and Probability Display)
-def fancy_detection(image_file, prediction, image_array):
+def fancy_detection(image_file, prediction, threshold=0.5):
+    """Simulate bounding box display and fake probability."""
+    st.image(image_file, caption="Detected Face", use_container_width=True)
     probability = round(prediction[0][0] * 100, 2)
-
-    # Display the result of prediction
-    if prediction[0][0] > 0.5:
+    if prediction[0][0] > threshold:
         st.markdown(f'<div class="result">This is a **fake** image. Probability: {probability}%</div>', unsafe_allow_html=True)
     else:
         st.markdown(f'<div class="result">This is a **real** image. Probability: {100 - probability}%</div>', unsafe_allow_html=True)
-    
-    uploaded_image = Image.open(image_file)
-    detected_image, faces = detect_face_and_heatmap(uploaded_image)
-
-    # Show the image with bounding box
-    st.image(detected_image, caption="Detected Face", use_container_width=True)
-
-    # Optional: Heatmap effect (simple simulation)
-    heatmap = detected_image.copy()
-    heatmap = ImageOps.grayscale(heatmap)
-    st.image(heatmap, caption="Simulated Heatmap (Grayscale)", use_container_width=True)
-
-# Report Fake Image (Image Upload)
-def report_fake_image(image_file):
-    try:
-        # Save the image to a file (for example, in a local directory or cloud storage)
-        with open("reported_images/fake_image.jpg", "wb") as f:
-            f.write(image_file.getbuffer())
-        st.success("Thank you for reporting. We will use this image for future training.")
-    except Exception as e:
-        st.error(f"Error saving image: {e}")
 
 # Main Functionality
 def main():
-    model_path = 'improved_vgg16.keras'
+    # Load the model
+    model_path = 'improved_vgg16.keras' 
     model, model_error = load_deepfake_model(model_path)
 
     if model_error:
@@ -162,23 +138,26 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Detection", "Deep Neural Network", "Contact Us"])
-
+    tabs = st.tabs(["About", "Detection","Deep Neural Network", "Contact Us"])
+    
     # About Tab
     with tabs[0]:
         st.subheader("Detect Deepfakes Instantly")
-        st.write("In an age where manipulated media is becoming alarmingly common, our Deepfake Detection platform empowers users to verify the authenticity of images with just a simple upload.")
+        st.write("In an age where manipulated media is becoming alarmingly common, our Deepfake Detection platform empowers users to verify the authenticity of images with just a simple upload. This tool is designed to safeguard public trust, prevent misinformation, and protect against the malicious use of deepfake technology on social media.")
+        
         st.subheader("Why It Matters:")
         st.markdown("""
-        - **Over 8 million deepfake attempts flood social media weekly, spreading manipulated content and eroding online integrity.**
+        - **Over 8 million deepfake attempts flood social media weekly, spreading manipulated content and eroding online integrity. (Taeb & Chi, 2022).**  
         - **Deepfakes fuel misinformation, pose risks to privacy, and undermine trust in digital content.**
         """)
+        
         st.subheader("How We Help:")
         st.markdown("""
         - **Detect & Verify**: Quickly identify manipulated media using cutting-edge deep learning techniques.  
         - **Report Deepfakes**: Contribute to combating misinformation by reporting suspicious content directly through the platform.  
         - **Stay Informed**: Access resources and guides to understand and navigate the challenges of deepfake technology.  
         """)
+        
 
     # Detection Tab
     with tabs[1]:
@@ -186,41 +165,41 @@ def main():
         uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
         if uploaded_file:
-            col1, col2 = st.columns(2)
-            with col1:
-                st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+            st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
+            image_array = preprocess_image(uploaded_file)
 
-            image_array, image = preprocess_image(uploaded_file)
-
-            with col2:
-                if image_array is not None and image is not None:
+            # Prediction
+            if st.button("Detect Deepfake"):
+                if image_array is not None and model is not None:
                     with st.spinner("Analyzing the image..."):
                         try:
                             prediction = model.predict(image_array)
-                            fancy_detection(uploaded_file, prediction, image_array)
-
+                            fancy_detection(uploaded_file, prediction)
+                            
                             agree = st.radio("Would you like to report this image as a deepfake?", ["Yes", "No"], index=1)
                             if agree == "Yes":
-                                report_fake_image(uploaded_file)
+                                report_fake_image()
                         except Exception as e:
                             st.error(f"Error during prediction: {e}")
                 else:
                     st.warning("Please upload a valid image.")
 
-    # Technology Tab
+    # Technology
     with tabs[2]:
         st.subheader("Cutting-Edge AI for Reliable Detection")
-        st.write("Our deepfake detection engine is built on ResNet50, a state-of-the-art convolutional neural network, fine-tuned for precision and reliability.")
+        st.write("Our deepfake detection engine is built on ResNet50, a state-of-the-art convolutional neural network, fine-tuned for precision and reliability." )
+
         st.subheader("How it works?")
-        st.markdown("""
+            st.markdown("""
             - **Transfer Learning: Utilizing the power of ImageNet pre-trained ResNet50, our model is tailored for detecting deepfakes with advanced fine-tuning.**  
             - **Diverse Datasets: Trained on a comprehensive dataset sourced from multiple platforms to enhance generalization and robustness.**
             - **Performance: Optimized to ensure accurate, fast, and scalable detection to meet real-world challenges.**""")
-
-    # Contact Tab
+    
+    # Contact us Tab
     with tabs[3]:
         st.subheader("Need Help?")
         st.write("Email to 23054196@siswa.um.edu.my for more information")
+
 
 if __name__ == "__main__":
     main()
