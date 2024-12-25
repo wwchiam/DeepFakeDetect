@@ -3,10 +3,10 @@ import numpy as np
 from keras.models import load_model
 from keras.preprocessing.image import load_img, img_to_array
 import os
-import cv2
 import matplotlib.pyplot as plt
 from tensorflow.keras.preprocessing.image import img_to_array
 from mtcnn import MTCNN
+from PIL import Image
 
 # Page Title
 st.set_page_config(
@@ -27,28 +27,32 @@ def load_deepfake_model(model_path):
             return None, f"Failed to load the model. Error: {e}"
     return None, "Model file not found. Please check the path."
 
-# Image Preprocessing
+# Image Preprocessing (without cv2)
 def preprocess_image(image_file, target_size=(224, 224)):
     try:
+        # Open image with PIL, resize to target size and convert to array
         image = load_img(image_file, target_size=target_size)
         image_array = img_to_array(image)
-        image_array = cv2.cvtColor(image_array, cv2.COLOR_RGB2BGR)  # Convert RGB to BGR
+        image_array = image_array / 255.0  # Normalize the image
         return np.expand_dims(image_array, axis=0)
     except Exception as e:
         st.error(f"Error processing image: {e}")
         return None
 
-# Face Detection with MTCNN
+# Face Detection with MTCNN (without OpenCV)
 def detect_face_and_heatmap(image):
     detector = MTCNN()
     faces = detector.detect_faces(image)
     
-    # Draw bounding boxes around faces
+    # Draw bounding boxes around faces (this time with PIL)
+    pil_image = Image.fromarray(image)
     for face in faces:
         x, y, w, h = face['box']
-        cv2.rectangle(image, (x, y), (x + w, y + h), (0, 255, 0), 2)
-    
-    return image, faces
+        pil_image = pil_image.crop((x, y, x + w, y + h))  # Crop the face region
+
+    # Convert the cropped face back to numpy array for display
+    face_image = np.array(pil_image)
+    return face_image, faces
 
 # Fancy Detection (Bounding Box and Probability Display)
 def fancy_detection(image_file, prediction, image_array):
