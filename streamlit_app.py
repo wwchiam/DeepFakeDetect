@@ -86,9 +86,6 @@ st.markdown(
 st.markdown('<div class="title">Deepfake Detection System</div>', unsafe_allow_html=True)
 st.markdown('<div class="sub-title">Seeing is no longer believing </div>', unsafe_allow_html=True)
 
-# Banner Image - No custom div needed, let Streamlit handle the structure
-# st.image('https://raw.githubusercontent.com/wwchiam/DeepFakeDetect/main/DeepfakeBanner.jpg')
-
 # Model Loading
 @st.cache_resource
 def load_deepfake_model(model_path):
@@ -163,6 +160,10 @@ def main():
         st.subheader("Upload an Image for Detection")
         uploaded_file = st.file_uploader("Upload an image (JPG, JPEG, PNG)", type=["jpg", "jpeg", "png"])
 
+        # Sensitivity Slider
+        sensitivity = st.slider("Select Sensitivity Threshold", 0.0, 1.0, 0.5, 0.01)
+        st.write(f"Selected Sensitivity Threshold: {sensitivity}")
+
         if uploaded_file:
             st.image(uploaded_file, caption="Uploaded Image", use_container_width=True)
             image_array = preprocess_image(uploaded_file)
@@ -173,7 +174,7 @@ def main():
                     with st.spinner("Analyzing the image..."):
                         try:
                             prediction = model.predict(image_array)
-                            fancy_detection(uploaded_file, prediction)
+                            fancy_detection(uploaded_file, prediction, threshold=sensitivity)
                             
                             agree = st.radio("Would you like to report this image as a deepfake?", ["Yes", "No"], index=1)
                             if agree == "Yes":
