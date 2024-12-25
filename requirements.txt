@@ -9,5 +9,4 @@ streamlit
 streamlit_lottie
 numpy
 scikit-learn
-pip install opencv-python
 opencv-python
