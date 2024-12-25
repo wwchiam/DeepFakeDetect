@@ -138,15 +138,18 @@ def main():
         return
 
     # Tab Layout
-    tabs = st.tabs(["About", "Detection","Deep Neural Networ", "Contact Us"])
+    tabs = st.tabs(["About", "Detection","Deep Neural Network", "Contact Us"])
     
     # About Tab
     with tabs[0]:
-        st.subheader("Protecting Online Trust: Detect Deepfakes Instantly")
+        st.subheader("Detect Deepfakes Instantly")
         st.write("In an age where manipulated media is becoming alarmingly common, our Deepfake Detection platform empowers users to verify the authenticity of images with just a simple upload. This tool is designed to safeguard public trust, prevent misinformation, and protect against the malicious use of deepfake technology on social media.")
         
         st.subheader("Why It Matters:")
-        st.write("Over 8 million deepfake attempts flood social media weekly, spreading manipulated content and eroding online integrity. (Taeb & Chi, 2022). Deepfakes fuel misinformation, pose risks to privacy, and undermine trust in digital content.")
+        st.markdown("""
+        - **Over 8 million deepfake attempts flood social media weekly, spreading manipulated content and eroding online integrity. (Taeb & Chi, 2022).**  
+        - **Deepfakes fuel misinformation, pose risks to privacy, and undermine trust in digital content.**
+        """)
         
         st.subheader("How We Help:")
         st.markdown("""
@@ -183,8 +186,18 @@ def main():
 
     # Technology
     with tabs[2]:
-        st.subheader("Deep Neural Network")
-        st.write("This ")
+        st.subheader("Cutting-Edge AI for Reliable Detection")
+        st.write("Our deepfake detection engine is built on ResNet50, a state-of-the-art convolutional neural network, fine-tuned for precision and reliability." )
+
+        st.subheader("How it works?")
+            st.markdown("""
+            - **Transfer Learning: Utilizing the power of ImageNet pre-trained ResNet50, our model is tailored for detecting deepfakes with advanced fine-tuning.**  
+            - **Diverse Datasets: Trained on a comprehensive dataset sourced from multiple platforms to enhance generalization and robustness.**
+            - **Performance: Optimized to ensure accurate, fast, and scalable detection to meet real-world challenges.**
+
+        st.subheader("Our Training Results")
+            
+            """)
     
     # Contact us Tab
     with tabs[3]:
