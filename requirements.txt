@@ -1,12 +1,9 @@
 streamlit
-streamlit_navigation_bar
+streamlit-navigation-bar
 tensorflow
-streamlit
 numpy
 pillow
-streamlit
-streamlit_lottie
-numpy
+streamlit-lottie
 scikit-learn
 
 
